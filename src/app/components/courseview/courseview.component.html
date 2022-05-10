@@ -1,0 +1,21 @@
+<div>
+  Red background
+  <div>
+    <div class="flex">
+      <p>IMAGE</p>
+      <h2>{{ title }}</h2>
+      <!-- flex grow here -->
+      <button>Siguiendo</button>
+    </div>
+
+    <hr />
+    <div class="flex">
+      <span>INPUT</span>
+      <!-- button title changes depending on chosen option  -->
+      <button>Ordenar por</button>
+    </div>
+  </div>
+</div>
+<div class="flex">
+  <app-themecard *ngFor="let theme of themes" [theme]="theme"></app-themecard>
+</div>
