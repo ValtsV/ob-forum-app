@@ -1,0 +1,16 @@
+<app-question-card
+  *ngFor="let question of pinnedQuestions"
+  [question]="question"
+  [isPinned]="true"
+  (redirectToPregunta)="redirect()"
+></app-question-card>
+<div>
+  <div class="flex">
+    <button (click)="orderByPositiveVotes()">En tendencia</button>
+    <button (click)="orderByDate()">MAs recientes</button>
+  </div>
+  <app-question-card
+    *ngFor="let question of questions"
+    [question]="question"
+  ></app-question-card>
+</div>

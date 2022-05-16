@@ -15,10 +15,18 @@ export class CourseService {
     return of(COURSES)
   } 
 
+  // TODO: remove undefined
+  getCourseById(courseId: number): Observable<Course> {
+    const course = COURSES.find(course => course.id === courseId)
+    if (!course) {
+      throw new Error('Course not found')
+    }
+    return of(course)
+  }
+
   getSelectedCourse(): Observable<Course> {
     return this.selectedCourse.asObservable()
   }
-
 
   setSelectedCourse(course: Course): void {
     this.selectedCourse.next(course)

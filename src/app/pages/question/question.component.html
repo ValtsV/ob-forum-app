@@ -1,0 +1,35 @@
+<button>{{ course?.title }}/{{ theme.title }}</button>
+<div>
+  <div>
+    <span>{{ question?.title }}</span>
+    <span
+      >Subido por @{{ question?.user?.username }} hace
+      {{ timeSincePublished }}</span
+    >
+  </div>
+  <button>ICON Seguir pregunta</button>
+</div>
+<hr />
+<p>
+  {{ question?.description }}
+</p>
+<hr />
+<div class="flex">
+  <div>
+    <button>{{ question?.totalPositiveVotes }}</button>
+    <button>{{ question?.totalNegativeVotes }}</button>
+    <button>ICON Responder</button>
+  </div>
+  <button>Pin this</button>
+</div>
+<div class="flex">
+  <span>{{ answers.length }} respuestas</span>
+  <button>Ordenar</button>
+</div>
+<div>
+  <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>
+  <div class="flex">
+    <span> ICON </span>
+    <span>TIPTAP input</span>
+  </div>
+</div>

@@ -22,7 +22,7 @@ export class SidemenuComponent implements OnInit {
     this.courseService.getSelectedCourse().subscribe((course) => this.selectedCourse = course)
   }
 
-  smthf = (course: Course) => {
+  selectCourse = (course: Course) => {
     this.courseService.setSelectedCourse(course)}
 
 

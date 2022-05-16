@@ -24,4 +24,22 @@ export class CourseviewComponent implements OnInit {
     })
   }
 
+  orderByPinned() {
+    this.themes = this.themes.sort((a, b) => {
+      if(!a.pinned && b.pinned) {
+        return 1
+      }
+      return 0
+    })
+  }
+
+  orderByQuestionCount() {
+    this.themes = this.themes.sort((a, b) => {
+      if(a.preguntasCount >= b.preguntasCount) {
+        return -1
+      }
+      return 0
+    })
+  }
+
 }

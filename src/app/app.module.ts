@@ -9,7 +9,18 @@ import { CourseviewComponent } from './components/courseview/courseview.componen
 import { ThemecardComponent } from './components/themecard/themecard.component';
 import { ButtonComponent } from './components/button/button.component';
 import { CourseService } from './service/course.service';
+import { TemasComponent } from './pages/temas/temas.component';
+import { DiscusionesComponent } from './pages/discusiones/discusiones.component';
+import { QuestionsComponent } from './components/questions/questions.component';
+import { QuestionsHeaderComponent } from './components/questions-header/questions-header.component';
+import { QuestionCardComponent } from './components/question-card/question-card.component';
+import { AnswerComponent } from './components/answer/answer.component';
+import { QuestionComponent } from './pages/question/question.component';
+import { AddQuestionComponent } from './pages/add-question/add-question.component';
+import { LoginComponent } from './pages/login/login.component';
  
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +28,16 @@ import { CourseService } from './service/course.service';
     SidemenuComponent,
     CourseviewComponent,
     ThemecardComponent,
-    ButtonComponent
+    ButtonComponent,
+    TemasComponent,
+    DiscusionesComponent,
+    QuestionsComponent,
+    QuestionsHeaderComponent,
+    QuestionCardComponent,
+    QuestionComponent,
+    AnswerComponent,
+    AddQuestionComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

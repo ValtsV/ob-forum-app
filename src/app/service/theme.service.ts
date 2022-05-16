@@ -12,8 +12,14 @@ export class ThemeService {
   constructor() { }
 
   getThemes(courseId: number): Observable<Theme[]> {
-    console.log("runs")
     return of(THEMES.filter(theme => theme.cursoId == courseId))
   }
 
+  getTheme(themeId: number): Observable<Theme> {
+    const theme = THEMES.find(theme => theme.id === themeId)
+    if(theme === undefined) {
+      return of({} as Theme)
+    }
+    return of(theme)
+  }
 }

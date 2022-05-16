@@ -1,0 +1,20 @@
+<a class="flex" routerLink="./preguntas/{{ question.id }}">
+  <div>
+    <span>ICON</span>
+    <span
+      >VOTES
+      {{ question.totalPositiveVotes - question.totalNegativeVotes }}</span
+    >
+  </div>
+  <div>
+    <span *ngIf="isPinned">Fijado</span>
+    <h4>{{ question.title }}</h4>
+    <span
+      >Publicado por {{ question.user.username }} hace
+      {{ timeSincePublished }}</span
+    >
+  </div>
+  <div>
+    {{ question.totalRespuestas }}
+  </div>
+</a>

@@ -1,0 +1,26 @@
+<div>
+  <div class="flex">
+    <span>IMAGE</span>
+    <div>
+      <span>
+        {{ answer.user.username }}
+      </span>
+      <span>Publicado hace {{ timeSincePublished }}</span>
+    </div>
+    <div>
+      <span>icon</span>
+      Fijado por mods
+    </div>
+  </div>
+  <div class="flex">
+    <span>ICON</span>
+    <div>
+      <p>{{ answer.answer }}</p>
+      <div>
+        <button>{{ answer.totalPositiveVotes }}</button>
+        <button>{{ answer.totalNegativeVotes }}</button>
+        <button>Pin it</button>
+      </div>
+    </div>
+  </div>
+</div>
