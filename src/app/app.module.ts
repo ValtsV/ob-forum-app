@@ -18,6 +18,7 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { QuestionComponent } from './pages/question/question.component';
 import { AddQuestionComponent } from './pages/add-question/add-question.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
  
 
 
@@ -41,7 +42,8 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [CourseService],
   bootstrap: [AppComponent]

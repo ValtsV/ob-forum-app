@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div>
+  <form [formGroup]="form" (ngSubmit)="submitLoginForm()">
+    <label for="email">Email: </label>
+    <input id="email" name="email" type="text" [formControlName]="'email'" />
+    <div
+      *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.dirty"
+    >
+      Cómo quieres entrar sin darme tu email?
+    </div>
+    <label for="password">Password: </label>
+    <input id="password" type="password" [formControlName]="'password'" />
+    <div
+      *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.dirty"
+    >
+      No hay contraseña, no hay entrada!
+    </div>
+    <button type="submit">Entrar</button>
+  </form>
+</div>
