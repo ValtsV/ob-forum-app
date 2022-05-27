@@ -16,12 +16,15 @@ export class QuestionsHeaderComponent implements OnInit {
   theme: Theme = {} as Theme
   themeId!: number
 
+
   constructor(private themeService: ThemeService, private courseService: CourseService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.themeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.themeService.getTheme(this.themeId).subscribe(theme => this.theme = theme)
-    this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
+    this.themeService.getTheme(this.themeId).subscribe(theme => {
+      this.theme = theme
+      this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
+    })
   }
 
 

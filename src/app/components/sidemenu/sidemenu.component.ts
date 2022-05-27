@@ -14,10 +14,9 @@ export class SidemenuComponent implements OnInit {
   constructor(private courseService: CourseService) {   }
 
   ngOnInit(): void {
-    this.courseService.getCourses(1).subscribe((courses) => {
+    this.courseService.getCourses().subscribe((courses) => {
       this.courses = courses
-      this.selectedCourse = courses[0]
-      this.courseService.setSelectedCourse(this.selectedCourse)
+      this.courseService.setSelectedCourse(courses[0])
     })
     this.courseService.getSelectedCourse().subscribe((course) => this.selectedCourse = course)
   }
@@ -25,5 +24,7 @@ export class SidemenuComponent implements OnInit {
   selectCourse = (course: Course) => {
     this.courseService.setSelectedCourse(course)}
 
-
+  
 }
+
+

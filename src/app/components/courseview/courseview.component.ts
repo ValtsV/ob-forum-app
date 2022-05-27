@@ -18,10 +18,11 @@ export class CourseviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseService.getSelectedCourse().subscribe((course) => {
-      this.title = course.title
+      this.title = course.name
       this.courseId = course.id
     this.themeService.getThemes(this.courseId).subscribe((themes) => this.themes = themes);
     })
+
   }
 
   orderByPinned() {

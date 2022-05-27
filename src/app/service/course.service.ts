@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { COURSES } from '../COURSES_MOCK_DATA';
+import { BehaviorSubject, Observable, of, ReplaySubject, Subject, tap } from 'rxjs';
 import { Course } from '../Course';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private selectedCourse = new BehaviorSubject<Course>(COURSES[0])
+  private selectedCourse$ = new ReplaySubject<Course>()
+  url: string = 'http://localhost:3333/foro/cursos'
+  courses!: Course[]
 
-  constructor() {   }
 
-  getCourses(userId: number): Observable<Course[]> {
-    return of(COURSES)
+  constructor(private http: HttpClient) {   }
+
+  getCourses(): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get<Course[]>(this.url, httpOptions)
   } 
-
-  // TODO: remove undefined
-  getCourseById(courseId: number): Observable<Course> {
-    const course = COURSES.find(course => course.id === courseId)
-    if (!course) {
-      throw new Error('Course not found')
-    }
-    return of(course)
+ 
+  getCourseById(courseId: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get<Course>(this.url + '/' + courseId, httpOptions)
   }
 
   getSelectedCourse(): Observable<Course> {
-    return this.selectedCourse.asObservable()
+    return this.selectedCourse$.asObservable()
   }
 
   setSelectedCourse(course: Course): void {
-    this.selectedCourse.next(course)
+    this.selectedCourse$.next(course)
   }
 }

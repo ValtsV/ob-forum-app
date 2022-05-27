@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { QuestionComponent } from './pages/question/question.component';
 import { AddQuestionComponent } from './pages/add-question/add-question.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { httpInterceptorProviders } from './_helpers/http-request.interceptor';
  
 
 
@@ -42,10 +44,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [CourseService],
+  providers: [httpInterceptorProviders, CourseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
