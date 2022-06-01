@@ -4,6 +4,6 @@ export interface Theme {
     title: String,
     cursoId: number,
     moduloId: null | number,
-    preguntasCount: number,
-    pinned: boolean
+    pinned: boolean,
+    preguntasCount: number
 }

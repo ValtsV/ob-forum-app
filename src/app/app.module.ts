@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,7 @@ import { QuestionComponent } from './pages/question/question.component';
 import { AddQuestionComponent } from './pages/add-question/add-question.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { httpInterceptorProviders } from './_helpers/http-request.interceptor';
+import { HttpRequestInterceptor } from './http-request.interceptor';
  
 
 
@@ -41,14 +41,20 @@ import { httpInterceptorProviders } from './_helpers/http-request.interceptor';
     AnswerComponent,
     AddQuestionComponent,
     LoginComponent
-  ],
+    ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [httpInterceptorProviders, CourseService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestInterceptor,
+    multi: true
+  }],
+    // providers: [CourseService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

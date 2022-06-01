@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/Course';
 import { Question } from 'src/app/Question';
@@ -21,17 +21,37 @@ export class QuestionComponent implements OnInit {
   course?: Course = {} as Course
   timeSincePublished: String = "2 días"
 
+
   constructor(private questionService: QuestionService, private answerService: AnswerService, private themeService: ThemeService, private courseService: CourseService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
     const themeId = Number(this.route.snapshot.paramMap.get('themeId'))
 
-    this.themeService.getTheme(themeId).subscribe(theme => this.theme = theme)
-    this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
+    this.themeService.getTheme(themeId).subscribe(theme => {
+      this.theme = theme
+      this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
+    })
 
-    this.questionService.getQuestionById(questionId).subscribe(question => this.question = question)
+    this.questionService.getQuestionById(questionId).subscribe(question => {
+      this.question = question})
     this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => this.answers = answers)
   }
+
+
+  giveVote(vote: boolean) {
+    const voteType = vote? 'totalPositiveVotes' : 'totalNegativeVotes'
+    
+
+    this.questionService.vote(this.question.id!, vote).subscribe({
+      next: (data) => {
+          const updatedQuestion = {...this.question, ...data}
+          this.question = updatedQuestion
+        
+      },
+      error: error => console.log(error.status)
+    })
+  }
+
 
 }

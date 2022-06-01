@@ -17,8 +17,12 @@
     <div>
       <p>{{ answer.answer }}</p>
       <div>
-        <button>{{ answer.totalPositiveVotes }}</button>
-        <button>{{ answer.totalNegativeVotes }}</button>
+        <button (click)="giveVote(true)">
+          {{ answer.totalPositiveVotes }}
+        </button>
+        <button (click)="giveVote(false)">
+          {{ answer.totalNegativeVotes }}
+        </button>
         <button>Pin it</button>
       </div>
     </div>

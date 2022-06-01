@@ -25,6 +25,7 @@ export class CourseviewComponent implements OnInit {
 
   }
 
+  // orders by pinned only desc
   orderByPinned() {
     this.themes = this.themes.sort((a, b) => {
       if(!a.pinned && b.pinned) {
@@ -34,6 +35,7 @@ export class CourseviewComponent implements OnInit {
     })
   }
 
+  // orders by question count only desc
   orderByQuestionCount() {
     this.themes = this.themes.sort((a, b) => {
       if(a.preguntasCount >= b.preguntasCount) {

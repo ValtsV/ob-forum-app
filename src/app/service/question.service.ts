@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { QUESTIONS } from '../QUESTIONS_MOCK_DATA';
+import { map, Observable, of } from 'rxjs';
 import { Question } from '../Question';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
+  url: string = 'http://localhost:3333/foro/votos/preguntas'
 
-  constructor() { }
 
-  getQuestionsByTemaId(temaId: number): Observable<Question[]> {
-    return of(QUESTIONS)
+  constructor(private http: HttpClient) { }
+
+  getQuestionsByTemaId(themeId: number): Observable<Question[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', observe: 'response'})
+
+    };
+    return this.http.get<Question[]>('http://localhost:3333/foro/preguntas/temas/' + themeId)
   }
 
   getQuestionById(questionId: number): Observable<Question> {
-    const question = QUESTIONS.find(question => question.id === questionId)
-      if (!question) {
-        throw new Error("Question not found")
+    return this.http.get<Question>('http://localhost:3333/foro/preguntas/' + questionId)
+  }
+
+  vote(questionId: number, vote: boolean): Observable<any> {
+    const httpOptions = {
+      // headers: new HttpHeaders({ 'Content-Type': 'application/json', observe: 'response'})
+      headers: new HttpHeaders({ observe: 'response'})
+
+    };
+    // const headers: new HttpHeaders({ observe: 'response'})
+
+    const data = {vote: vote}
+    return this.http.post<any>('http://localhost:3333/foro/votos/preguntas/' + questionId, data)
+    .pipe(map(res => res.map((votes: any) => votes.vote)))
+    .pipe(map(res => {
+      const totalPositiveVotes = res.filter(Boolean).length
+      const totalNegativeVotes = res.length - totalPositiveVotes
+      return {
+        totalPositiveVotes: totalPositiveVotes,
+        totalNegativeVotes: totalNegativeVotes
       }
-    return of(question)
+    }))
   }
 }

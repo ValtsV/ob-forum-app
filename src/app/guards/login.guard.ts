@@ -12,7 +12,7 @@ export class LoginGuard implements CanActivate {
   constructor(private storageService: StorageService, private router: Router) {
 
   }
-
+  
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

@@ -17,16 +17,13 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     const themeId = Number(this.route.snapshot.paramMap.get('id'));
     this.questionService.getQuestionsByTemaId(themeId).subscribe(questions => {
+      console.log(questions)
       questions.forEach(question => {
         question.pinned ? this.pinnedQuestions.push(question) : this.questions.push(question)
       })
     })
   }
 
-  // onclick
-  redirect() {
-    // this.router
-  }
 
   orderByPositiveVotes() {
     this.questions = this.questions.sort((a,b) => {
@@ -42,4 +39,12 @@ export class QuestionsComponent implements OnInit {
       return 0
     })
   }
+
+  // givePositiveVote(question: Question) {
+  //   console.log(question)
+  // }
+
+  // giveNegativeVote(question: Question) {
+  //   console.log(question)
+  // }
 } 

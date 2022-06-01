@@ -22,6 +22,7 @@ export class QuestionsHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.themeId = Number(this.route.snapshot.paramMap.get('id'));
     this.themeService.getTheme(this.themeId).subscribe(theme => {
+      console.log(theme)
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
     })

@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CourseService {
   private selectedCourse$ = new ReplaySubject<Course>()
   url: string = 'http://localhost:3333/foro/cursos'
+
   courses!: Course[]
 
 
@@ -18,14 +19,16 @@ export class CourseService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.get<Course[]>(this.url, httpOptions)
+    
+    return this.http.get<Course[]>(this.url)
   } 
  
   getCourseById(courseId: number): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.get<Course>(this.url + '/' + courseId, httpOptions)
+    
+    return this.http.get<Course>(this.url + '/' + courseId)
   }
 
   getSelectedCourse(): Observable<Course> {

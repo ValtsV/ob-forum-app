@@ -1,4 +1,4 @@
-<button>{{ course?.name }}/{{ theme.title }}</button>
+<a routerLink="../../">{{ course?.name }}/{{ theme.title }}</a>
 <div>
   <div>
     <span>{{ question?.title }}</span>
@@ -16,8 +16,12 @@
 <hr />
 <div class="flex">
   <div>
-    <button>{{ question?.totalPositiveVotes }}</button>
-    <button>{{ question?.totalNegativeVotes }}</button>
+    <button type="button" (click)="giveVote(true)">
+      {{ question?.totalPositiveVotes }}
+    </button>
+    <button type="button" (click)="giveVote(false)">
+      {{ question?.totalNegativeVotes }}
+    </button>
     <button>ICON Responder</button>
   </div>
   <button>Pin this</button>

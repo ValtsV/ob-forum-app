@@ -9,7 +9,7 @@ import { CourseService } from './course.service';
   providedIn: 'root'
 })
 export class AuthService {
-  url: string = 'http://localhost:3333/foro/auth/login'
+  url: string = 'http://localhost:3333/foro/auth/'
 
 
   constructor(private http: HttpClient, private courseService: CourseService) { }
@@ -18,6 +18,30 @@ export class AuthService {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    return this.http.post<User>(this.url, authData, httpOptions)
+    // const httpOptions = {
+    //   withCredentials: true
+    // };
+    return this.http.post<User>(this.url + 'login', authData, httpOptions)
+  }
+
+  register(username: string, email: string, password: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.post(this.url + 'register', {
+      username,
+      email,
+      password
+    }, httpOptions);
+  }
+
+  refreshToken(token: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post(this.url + 'refreshtoken', {
+      refreshToken: token
+    }, httpOptions);
   }
 }
