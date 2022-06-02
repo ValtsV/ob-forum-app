@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Question } from '../Question';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { QuestionRequest } from '../QuestionRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,16 @@ export class QuestionService {
 
   getQuestionById(questionId: number): Observable<Question> {
     return this.http.get<Question>('http://localhost:3333/foro/preguntas/' + questionId)
+  }
+
+  saveQuestion(questionHtml: string, themeId: number): Observable<any> {
+    const questionRequest: QuestionRequest = {
+      description: questionHtml,
+    title: "Pregunta title",
+    pinned: false,
+    temaId: themeId
+    }
+    return this.http.post('http://localhost:3333/foro/preguntas', questionRequest)
   }
 
   vote(questionId: number, vote: boolean): Observable<any> {

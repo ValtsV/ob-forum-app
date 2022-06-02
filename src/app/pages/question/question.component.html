@@ -34,6 +34,6 @@
   <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>
   <div class="flex">
     <span> ICON </span>
-    <span>TIPTAP input</span>
+    <app-tiptap (emitHtml)="saveAnswer($event)"></app-tiptap>
   </div>
 </div>

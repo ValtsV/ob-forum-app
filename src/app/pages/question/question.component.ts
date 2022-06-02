@@ -53,5 +53,9 @@ export class QuestionComponent implements OnInit {
     })
   }
 
+  saveAnswer(answerHtml: string) {
+    const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
+    this.answerService.saveAnswer(answerHtml, questionId).subscribe(data => console.log(data))
+  }
 
 }

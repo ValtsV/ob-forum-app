@@ -19,8 +19,10 @@ import { AnswerComponent } from './components/answer/answer.component';
 import { QuestionComponent } from './pages/question/question.component';
 import { AddQuestionComponent } from './pages/add-question/add-question.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpRequestInterceptor } from './http-request.interceptor';
+import { NgxTiptapModule } from 'ngx-tiptap';
+import { TiptapComponent } from './components/tiptap/tiptap.component';
  
 
 
@@ -40,13 +42,16 @@ import { HttpRequestInterceptor } from './http-request.interceptor';
     QuestionComponent,
     AnswerComponent,
     AddQuestionComponent,
-    LoginComponent
-    ],
+    LoginComponent,
+    TiptapComponent
+      ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgxTiptapModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
