@@ -20,15 +20,15 @@ export class StorageService {
   }
 
   // FUTURE REFERENCE
-  // public isLoggedIn(): boolean {
-  //   const user = window.sessionStorage.getItem(USER_KEY);
-  //   if (user) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
+  public isLoggedIn(): boolean {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user) {
+      return true;
+    }
+    return false;
+  }
 
-  public isLoggedIn() {
+  public isLoggedInBSubject() {
     return this.isLogged
   }
 

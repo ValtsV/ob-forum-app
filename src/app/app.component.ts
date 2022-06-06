@@ -20,7 +20,7 @@ export class AppComponent {
   ngOnInit(): void {
     moment.locale('es')
     //  this.isLoggedIn = this.storageService.isLoggedIn()
-    this.storageService.isLoggedIn().subscribe(data => {
+    this.storageService.isLoggedInBSubject().subscribe(data => {
       this.isLoggedIn = data
     })
 
