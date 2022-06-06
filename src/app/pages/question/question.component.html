@@ -29,6 +29,8 @@
 <div class="flex">
   <span>{{ answers.length }} respuestas</span>
   <button>Ordenar</button>
+  <button (click)="orderByDate()">Actualización</button>
+  <button (click)="orderByVotes()">Más popular</button>
 </div>
 <div>
   <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>

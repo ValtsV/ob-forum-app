@@ -29,6 +29,7 @@
     "@types/prosemirror-state": "~1.2.8",
     "@types/prosemirror-transform": "~1.1.5",
     "@types/prosemirror-view": "~1.23.1",
+    "moment": "^2.29.3",
     "ngx-tiptap": "^5.0.0",
     "prosemirror-keymap": "~1.1.5",
     "prosemirror-model": "~1.16.1",

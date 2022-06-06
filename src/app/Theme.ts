@@ -1,7 +1,7 @@
 export interface Theme {
     id?: number,
-    description: String,
-    title: String,
+    description: string,
+    title: string,
     cursoId: number,
     moduloId: null | number,
     pinned: boolean,

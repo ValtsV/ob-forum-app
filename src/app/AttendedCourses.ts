@@ -1,5 +1,5 @@
 export interface AttendedCourses {
     cursoId: number,
-    avatar: null | String,
-    title: String
+    avatar: null | string,
+    title: string
 }

@@ -2,7 +2,7 @@ import { User } from "./User"
 
 export interface Answer {
         id?: number,
-        updatedAt: String,
+        updatedAt: string,
         answer: String,
         preguntaId: number,
         totalPositiveVotes: number,

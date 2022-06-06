@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Answer } from 'src/app/Answer';
 import { AnswerService } from 'src/app/service/answer.service';
+import * as moment from 'moment';
 
 
 @Component({
@@ -10,11 +11,12 @@ import { AnswerService } from 'src/app/service/answer.service';
 })
 export class AnswerComponent implements OnInit {
   @Input() answer: Answer = {} as Answer
-  timeSincePublished: String = '2 días'
+  timeSincePublished!: string
 
   constructor(private answerService: AnswerService) { }
 
   ngOnInit(): void {
+    this.timeSincePublished = moment(this.answer.updatedAt).fromNow()
   }
 
   giveVote(vote: boolean) {

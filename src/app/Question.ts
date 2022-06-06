@@ -2,9 +2,9 @@ import { User } from "./User"
 
 export interface Question {
     id?: number,
-    updatedAt: String,
-    description: String,
-    title: String,
+    updatedAt: string,
+    description: string,
+    title: string,
     totalPositiveVotes: number,
     totalNegativeVotes: number,
     totalRespuestas: number,

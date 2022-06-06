@@ -8,6 +8,7 @@ import { QuestionService } from 'src/app/service/question.service';
 import { ThemeService } from 'src/app/service/theme.service';
 import { Theme } from 'src/app/Theme';
 import { AnswerService } from 'src/app/service/answer.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-question',
@@ -19,7 +20,7 @@ export class QuestionComponent implements OnInit {
   answers: Answer[] = []
   theme: Theme = {} as Theme
   course?: Course = {} as Course
-  timeSincePublished: String = "2 días"
+  timeSincePublished!: string
 
 
   constructor(private questionService: QuestionService, private answerService: AnswerService, private themeService: ThemeService, private courseService: CourseService, private route: ActivatedRoute) { }
@@ -32,19 +33,17 @@ export class QuestionComponent implements OnInit {
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
     })
-    // err => {
-    //   if (err.status === 403)
-    //       // this.eventBusService.emit(new EventData('logout', null));
-    // })
 
     this.questionService.getQuestionById(questionId).subscribe(question => {
-      this.question = question})
+      this.question = question
+      this.timeSincePublished = moment(question.updatedAt).fromNow()
+    })
     this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => this.answers = answers)
   }
 
 
   giveVote(vote: boolean) {
-    const voteType = vote? 'totalPositiveVotes' : 'totalNegativeVotes'
+    // const voteType = vote? 'totalPositiveVotes' : 'totalNegativeVotes'
     
 
     this.questionService.vote(this.question.id!, vote).subscribe({
@@ -52,8 +51,7 @@ export class QuestionComponent implements OnInit {
           const updatedQuestion = {...this.question, ...data}
           this.question = updatedQuestion
         
-      },
-      error: error => console.log(error.status)
+      }
     })
   }
 
@@ -62,4 +60,12 @@ export class QuestionComponent implements OnInit {
     this.answerService.saveAnswer(answerHtml, questionId).subscribe(data => console.log(data))
   }
 
+  orderByDate() {
+    this.answers = this.answers.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+  }
+
+  orderByVotes() {
+    this.answers = this.answers.sort((a, b) => (b.totalPositiveVotes - b.totalNegativeVotes) - (a.totalPositiveVotes - a.totalNegativeVotes))
+
+  }
 }

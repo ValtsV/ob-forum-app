@@ -1,6 +1,6 @@
 
 export interface Course {
     id: number,
-    avatar: null | String,
-    name: String
+    avatar: null | string,
+    name: string
 }

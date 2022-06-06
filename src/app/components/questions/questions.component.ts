@@ -35,16 +35,6 @@ export class QuestionsComponent implements OnInit {
   }
 
   orderByDate() {
-    this.questions = this.questions.sort((a,b) => {
-      return 0
-    })
+    this.questions = this.questions.sort((a,b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
   }
-
-  // givePositiveVote(question: Question) {
-  //   console.log(question)
-  // }
-
-  // giveNegativeVote(question: Question) {
-  //   console.log(question)
-  // }
 } 

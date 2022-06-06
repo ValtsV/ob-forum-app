@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StorageService } from './service/storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,9 @@ export class AppComponent {
   constructor(private storageService: StorageService) {}
 
   ngOnInit(): void {
+    moment.locale('es')
     //  this.isLoggedIn = this.storageService.isLoggedIn()
     this.storageService.isLoggedIn().subscribe(data => {
-      console.log(data)
       this.isLoggedIn = data
     })
 

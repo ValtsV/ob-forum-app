@@ -29,7 +29,6 @@ export class StorageService {
   // }
 
   public isLoggedIn() {
-    console.log(this.isLogged.value)
     return this.isLogged
   }
 
@@ -56,15 +55,4 @@ export class StorageService {
   public getToken(): string | null {
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
-
-  // REFRESH TOKEN
-  // public saveRefreshToken(token: string): void {
-  //   window.sessionStorage.removeItem(REFRESHTOKEN_KEY);
-  //   window.sessionStorage.setItem(REFRESHTOKEN_KEY, token);
-  // }
-  // public getRefreshToken(): string | null {
-  //   return window.sessionStorage.getItem(REFRESHTOKEN_KEY);
-  // }
-
-  
 }
