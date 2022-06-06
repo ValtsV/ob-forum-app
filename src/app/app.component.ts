@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { StorageService } from './service/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ob-forum-app';
+  isLoggedIn: boolean = false
+  eventBusSub?: Subscription;
+
+  
+
+  constructor(private storageService: StorageService) {}
+
+  ngOnInit(): void {
+    //  this.isLoggedIn = this.storageService.isLoggedIn()
+    this.storageService.isLoggedIn().subscribe(data => {
+      console.log(data)
+      this.isLoggedIn = data
+    })
+
+  }
 }

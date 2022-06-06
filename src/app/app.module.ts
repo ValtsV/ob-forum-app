@@ -20,7 +20,7 @@ import { QuestionComponent } from './pages/question/question.component';
 import { AddQuestionComponent } from './pages/add-question/add-question.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpRequestInterceptor } from './http-request.interceptor';
+import { HttpRequestInterceptor } from './_helpers/http-request.interceptor'; 
 import { NgxTiptapModule } from 'ngx-tiptap';
 import { TiptapComponent } from './components/tiptap/tiptap.component';
  

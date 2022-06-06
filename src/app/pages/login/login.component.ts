@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/service/auth.service';
 import { CourseService } from 'src/app/service/course.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { UserService } from 'src/app/service/user.service';
-import { EventBusService } from 'src/app/_shared/event-bus.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +25,6 @@ export class LoginComponent implements OnInit {
               private storageService: StorageService, 
               private authService: AuthService, 
               private courseService: CourseService, 
-              private eventBusService: EventBusService,
               private router: Router, 
               private route: ActivatedRoute, 
               private fb: FormBuilder) {
@@ -53,13 +51,14 @@ export class LoginComponent implements OnInit {
               // this.storageService.saveToken(data.accessToken);
 
               // this.storageService.saveRefreshToken(data.refreshToken);
-              // console.log(data)
-              console.log(data)
               this.storageService.saveUser(data)
               this.courseService.getCourses().subscribe(courses => {
                 this.courseService.setSelectedCourse(courses[0])
+
+                // Forces app reload, to set loggedin value in app component correctly / this way login guard stays simple
+                this.redirect()
               })
-              this.router.navigateByUrl(this.return);
+              
             },
             error: err => {
               this.errorStatus = err.status
@@ -68,6 +67,10 @@ export class LoginComponent implements OnInit {
           
     }
   }
+
+  redirect(){
+    window.location.href=this.return
+  } 
 
   ngOnDestroy(): void {
     if (this.eventBusSub)

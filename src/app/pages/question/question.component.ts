@@ -32,6 +32,10 @@ export class QuestionComponent implements OnInit {
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
     })
+    // err => {
+    //   if (err.status === 403)
+    //       // this.eventBusService.emit(new EventData('logout', null));
+    // })
 
     this.questionService.getQuestionById(questionId).subscribe(question => {
       this.question = question})

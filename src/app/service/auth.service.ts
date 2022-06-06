@@ -12,15 +12,12 @@ export class AuthService {
   url: string = 'http://localhost:3333/foro/auth/'
 
 
-  constructor(private http: HttpClient, private courseService: CourseService) { }
+  constructor(private http: HttpClient) { }
 
   login(authData: AuthData): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    // const httpOptions = {
-    //   withCredentials: true
-    // };
     return this.http.post<User>(this.url + 'login', authData, httpOptions)
   }
 
@@ -36,12 +33,8 @@ export class AuthService {
     }, httpOptions);
   }
 
-  refreshToken(token: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    return this.http.post(this.url + 'refreshtoken', {
-      refreshToken: token
-    }, httpOptions);
+  refreshToken() {
+    return this.http.get('http://localhost:3333/foro/auth/' + 'refreshtoken');
   }
+
 }
