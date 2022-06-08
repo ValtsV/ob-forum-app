@@ -33,14 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => this.return = params['return'] || '/temas');
-      // if (this.storageService.getToken()) {
-      //   // validate token
-      //   this.router.navigateByUrl(this.return);
-      // }
-
-      // this.eventBusSub = this.eventBusService.on('logout', () => {
-      //   this.storageService.logout();
-      // });
+      
   }
 
   submitLoginForm() {
@@ -48,9 +41,6 @@ export class LoginComponent implements OnInit {
           const authData = this.form.getRawValue()  
           this.authService.login(authData).subscribe({
             next: data => {
-              // this.storageService.saveToken(data.accessToken);
-
-              // this.storageService.saveRefreshToken(data.refreshToken);
               this.storageService.saveUser(data)
               this.courseService.getCourses().subscribe(courses => {
                 this.courseService.setSelectedCourse(courses[0])

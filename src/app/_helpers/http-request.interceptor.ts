@@ -48,7 +48,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
         return this.authService.refreshToken().pipe(
           switchMap((gotRefreshToken) => {
-            console.log("handle error 401 - authservice refreshtoken")
             this.isRefreshing = false;
             this.hasRefreshed.next(gotRefreshToken);
             return next.handle(request);
@@ -67,9 +66,4 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       switchMap(() => next.handle(request)));
   }
 }
-
-//   // private addTokenHeader(request: HttpRequest<any>, token: string) {
-//   //   return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
-//   // }
-// }
 

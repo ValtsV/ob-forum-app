@@ -1,3 +1,7 @@
 <button>Volver</button>
 <span>SEARCH INPUT</span>
+<img [ngStyle]="{ width: '50px' }" [src]="img" />
 <span>USER INFO</span>
+<app-image-upload
+  (uploadingImageEvent)="setIsUploading($event)"
+></app-image-upload>

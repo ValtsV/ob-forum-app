@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpRequestInterceptor } from './_helpers/http-request.interceptor'; 
 import { NgxTiptapModule } from 'ngx-tiptap';
 import { TiptapComponent } from './components/tiptap/tiptap.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
  
 
 
@@ -43,8 +44,9 @@ import { TiptapComponent } from './components/tiptap/tiptap.component';
     AnswerComponent,
     AddQuestionComponent,
     LoginComponent,
-    TiptapComponent
-      ],
+    TiptapComponent,
+    ImageUploadComponent
+        ],
   imports: [
     BrowserModule,
     HttpClientModule,
