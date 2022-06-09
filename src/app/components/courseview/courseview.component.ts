@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/service/theme.service';
 import { CourseService } from 'src/app/service/course.service';
 import {Theme} from '../../Theme';
+import { FileUploadService } from 'src/app/service/file-upload.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-courseview',
@@ -9,17 +11,22 @@ import {Theme} from '../../Theme';
   styleUrls: ['./courseview.component.scss', '../../app.component.scss']
 })
 export class CourseviewComponent implements OnInit {
-  title!: String
+  title!: string
   courseId!: number
+  courseImg!: any
   themes: Theme[] = []
  
-  constructor(private themeService: ThemeService, private courseService: CourseService) { 
+  constructor(private themeService: ThemeService, private courseService: CourseService, private fileService: FileUploadService, protected sanitizer: DomSanitizer) { 
   }
 
   ngOnInit(): void {
     this.courseService.getSelectedCourse().subscribe((course) => {
       this.title = course.name
       this.courseId = course.id
+      this.fileService.getCourseImg(course.id).subscribe((base64ImageUrl: string) => {
+        this.courseImg =
+          this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
+      });
     this.themeService.getThemes(this.courseId).subscribe((themes) => this.themes = themes);
     })
 

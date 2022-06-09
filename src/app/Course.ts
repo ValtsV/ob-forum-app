@@ -1,6 +1,7 @@
+import { SafeResourceUrl } from "@angular/platform-browser";
 
 export interface Course {
     id: number,
-    avatar: null | string,
+    avatar:  string,
     name: string
 }

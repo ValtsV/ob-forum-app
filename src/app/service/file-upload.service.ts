@@ -12,7 +12,7 @@ export class FileUploadService {
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
     formData.append('file', file);
-    const req = new HttpRequest('POST', 'http://localhost:3333/foro/images', formData, {
+    const req = new HttpRequest('POST', 'http://localhost:3333/foro/users/images', formData, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -27,17 +27,26 @@ export class FileUploadService {
   //     responseType: 'arraybuffer'
   // });
 
-    return this.http.get('http://localhost:3333/foro/1/image');
+    return this.http.get('http://localhost:3333/foro/users/1/image');
   }
 
   getProfileImg(userId: number) : Observable<any> {
       const httpOptions = new HttpHeaders({ 'withCredentials': 'true'})
-    return this.http.get(`http://localhost:3333/foro/${userId}/image`, {
+    return this.http.get(`http://localhost:3333/foro/users/${userId}/image`, {
       headers: httpOptions,
       responseType: 'blob'
-  }).pipe(switchMap((blob) => this.convertBlobToBase64(blob)))
-  ;
+  }).pipe(switchMap((blob) => this.convertBlobToBase64(blob)));
   }
+
+  getCourseImg(courseId: number) : Observable<any> {
+    const httpOptions = new HttpHeaders({ 'withCredentials': 'true'})
+  return this.http.get(`http://localhost:3333/foro/cursos/${courseId}/image`, {
+    headers: httpOptions,
+    responseType: 'blob'
+}).pipe(switchMap((blob) => this.convertBlobToBase64(blob)
+));
+}
+
 
   convertBlobToBase64(blob: Blob) {
     return new Observable((observer : Observer<any>) => {
@@ -55,4 +64,6 @@ export class FileUploadService {
       };
     });
   }
+
+  
 }
