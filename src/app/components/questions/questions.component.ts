@@ -17,7 +17,6 @@ export class QuestionsComponent implements OnInit {
   ngOnInit(): void {
     const themeId = Number(this.route.snapshot.paramMap.get('id'));
     this.questionService.getQuestionsByTemaId(themeId).subscribe(questions => {
-      console.log(questions)
       questions.forEach(question => {
         question.pinned ? this.pinnedQuestions.push(question) : this.questions.push(question)
       })

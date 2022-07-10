@@ -1,2 +1,6 @@
-<app-header *ngIf="isLoggedIn"></app-header>
+<app-header
+  *ngIf="isLoggedIn"
+  [ngStyle]="{ 'background-color': headerBg }"
+  [currentRoute]="currentRoute"
+></app-header>
 <router-outlet></router-outlet>

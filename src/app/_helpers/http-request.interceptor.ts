@@ -17,7 +17,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private hasRefreshed: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
   constructor(private storageService: StorageService, private authService: AuthService) {
-    console.log('is this working')
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

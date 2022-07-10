@@ -1,0 +1,55 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    // display: flex;
+    // background-color: variables.$grey-2;
+    border: 1px solid variables.$grey-3;
+    border-radius: 15px;
+    width: 100%;
+    ::ng-deep tiptap-editor .ProseMirror {
+        background-color: variables.$grey-1;
+        padding: 10px;
+        border: 1px solid variables.$grey-3;
+        border-radius: 12px;
+    }
+}
+
+.tiptap {
+    &__div {
+        &-container {
+            background-color: variables.$grey-2;
+            border-bottom: 1px solid variables.$grey-3;
+            border-radius: 15px 15px 0 0 ;
+            padding: 12px;
+            padding-right: 21.25px;
+        }
+        &-options-container {
+            display: flex;
+            // align-items: center;
+            :nth-child(1) {
+                flex-grow: 1;
+            }
+            button {
+                background-color: transparent;
+            }
+        }
+        &-toggles {
+            margin-left: 50px;
+            display: flex;
+            gap: 20px;
+            button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        &-editor-container {
+            padding: 12px;
+        }
+    }
+    &__btn {
+        &-options {
+            margin-right: 22px;
+        }
+    }
+}

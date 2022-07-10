@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { UserService } from 'src/app/service/user.service';
@@ -14,30 +15,14 @@ export class HeaderComponent implements OnInit {
   user: User = {} as User
   profileImageSrc!: string
   img!: any
+  @Input() currentRoute!: string
 
-  constructor(private storageService: StorageService, private fileService: FileUploadService, protected sanitizer: DomSanitizer, private userService: UserService) { }
+
+  constructor(private storageService: StorageService, private fileService: FileUploadService, protected sanitizer: DomSanitizer, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     const user = this.storageService.getUser()
     this.user = user
-
-    this.fileService.getProfileImg(user.id).subscribe((base64ImageUrl: string) => {
-      this.img =
-        this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
-    });
-    
-  }
-
-  setIsUploading(value: boolean) {
-    if (value) {
-      this.img = '../../../assets/loading.gif'
-    } else {
-      this.fileService.getProfileImg(this.user.id).subscribe((base64ImageUrl: string) => {
-        this.img =
-          this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
-      })
-    }
-      
-
+    this.fileService.profileImg$.subscribe(img => this.img = img)
   }
 }

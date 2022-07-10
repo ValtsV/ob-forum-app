@@ -1,6 +1,7 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/service/file-upload.service';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -12,9 +13,9 @@ export class ImageUploadComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
-  @Output() uploadingImageEvent = new EventEmitter<boolean>()
 
-  constructor(private uploadService: FileUploadService) { }
+  constructor(private uploadService: FileUploadService, 
+              private storageService: StorageService) { }
 
   ngOnInit(): void {
   }
@@ -24,7 +25,8 @@ export class ImageUploadComponent implements OnInit {
   }
 
   upload(): void {
-    this.isUploading(true);
+    this.uploadService.setProfileImgAsUploading()
+    // this.isUploading(true);
     this.progress = 0;
     if (this.selectedFile) {
       const file: File | null = this.selectedFile;
@@ -36,7 +38,8 @@ export class ImageUploadComponent implements OnInit {
               this.progress = Math.round(100 * event.loaded / event.total);
             } else if (event instanceof HttpResponse) {
               this.message = 'Success'
-              this.isUploading(false)
+              this.uploadService.setProfileImg(this.storageService.getUser().id)
+              // this.isUploading(false)
 
             }
           },
@@ -55,7 +58,7 @@ export class ImageUploadComponent implements OnInit {
     }
   }
   
-  isUploading(value: boolean) {
-    this.uploadingImageEvent.emit(value);
-  }
+  // isUploading(value: boolean) {
+  //   this.uploadingImageEvent.emit(value);
+  // }
 }

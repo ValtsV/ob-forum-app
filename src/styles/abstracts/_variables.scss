@@ -1,0 +1,32 @@
+$primary-color: #32D5A4;
+$primary-color-neon: #28EDB2;
+$primary-color-light: rgba(40, 237, 178, 0.15);
+$primary-color-dark: #09C598;
+$primary-color-graded: linear-gradient(90deg, $primary-color 0%, $primary-color-neon 100%);
+
+$secondary-color: #4FBFFF;
+$secondary-color-dark: #2834BA;
+$secondary-color-black: #040F36;
+$secondary-color-light: rgba(79, 191, 255, 0.15);
+$secondary-color-graded: linear-gradient(97.33deg, $secondary-color-dark -0.11%, #3966DB 105.93%);
+
+$white: #fff;
+$white-dark-mode: #242529;
+$black: #121625;
+$black-dark-mode: #fff;
+$black-pure: #000;
+
+$grey-1: #F8F8F9;
+$grey-1-dark-mode:#101011;
+$grey-2: #F0F0F3;
+$grey-2-dark-mode: #1D1E22;
+$grey-3: #E6E6EA;
+$grey-3-dark-mode:#323339;
+$grey-4: #A5A8B3;
+$grey-4-dark-mode: #B5B8C4;
+$grey-5: #8C909C;
+$grey-5-dark-mode:#757883;
+$grey-6: #515561;
+$grey-6-dark-mode: #3D4150;
+
+$cancel: #EC555E; 

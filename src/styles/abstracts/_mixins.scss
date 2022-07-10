@@ -1,0 +1,29 @@
+// sometimes works, sometimes throws undefined mixin without making any changes, don't know why
+// also unexpected behavior - removes child image width
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @mixin flex-center-column {
+    @include flex-center;
+    flex-direction: column;
+  }
+  
+  @mixin flex-center-y {
+    display: flex;
+    align-items: center;
+  }
+  
+  @mixin flex-center-x {
+    display: flex;
+    justify-content: center;
+  }
+  

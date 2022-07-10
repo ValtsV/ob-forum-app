@@ -1,13 +1,15 @@
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer, switchMap } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable, Observer, Subject, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
+  profileImg$ = new Subject();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, protected sanitizer: DomSanitizer) { }
 
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
@@ -36,6 +38,21 @@ export class FileUploadService {
       headers: httpOptions,
       responseType: 'blob'
   }).pipe(switchMap((blob) => this.convertBlobToBase64(blob)));
+  }
+
+
+  setProfileImg(userId: number) : void {
+        const httpOptions = new HttpHeaders({ 'withCredentials': 'true'})
+      this.http.get(`http://localhost:3333/foro/users/${userId}/image`, {
+        headers: httpOptions,
+        responseType: 'blob'
+    }).pipe(switchMap((blob) => this.convertBlobToBase64(blob))).subscribe(base64ImageUrl => {
+      this.profileImg$.next(this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl))
+    });
+  }
+
+  setProfileImgAsUploading(): void {
+    this.profileImg$.next('assets/loading.gif')
   }
 
   getCourseImg(courseId: number) : Observable<any> {

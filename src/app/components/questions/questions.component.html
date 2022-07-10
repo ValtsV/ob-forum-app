@@ -1,12 +1,18 @@
-<app-question-card
-  *ngFor="let question of pinnedQuestions"
-  [question]="question"
-  [isPinned]="true"
-></app-question-card>
-<div>
-  <div class="flex">
-    <button (click)="orderByPositiveVotes()">En tendencia</button>
-    <button (click)="orderByDate()">MAs recientes</button>
+<div class="questions__div-pinned-questions">
+  <h2>Discusiones fijadas</h2>
+  <app-question-card
+    *ngFor="let question of pinnedQuestions"
+    [question]="question"
+    [isPinned]="true"
+  ></app-question-card>
+</div>
+
+<div class="questions__div-questions">
+  <div class="questions__div-orderby-options">
+    <button (click)="orderByPositiveVotes()" class="active">
+      <h2>En tendencia</h2>
+    </button>
+    <button (click)="orderByDate()"><h2>Más recientes</h2></button>
   </div>
   <app-question-card
     *ngFor="let question of questions"

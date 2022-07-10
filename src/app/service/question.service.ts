@@ -3,6 +3,7 @@ import { map, Observable, of } from 'rxjs';
 import { Question } from '../Question';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { QuestionRequest } from '../QuestionRequest';
+import { ViewportScroller } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,131 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    display: block;
+    padding: 40px;
+}
+
+.question {
+    &__div {
+        &-question-container {
+            background-color: variables.$white;
+            padding: 24px 32px;
+            border-radius: 12px;
+            margin-bottom: 46px;
+            border: 1px solid variables.$grey-3;
+            hr {
+                margin: 24px 0;
+                border: none;
+                border-bottom: 1px solid variables.$grey-3;
+            }
+        }
+        &-question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-title-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            h1 {
+                font-size: 28px;
+                font-weight: 600;
+                margin-bottom: 5px;
+            }
+            .votes-text {
+                color: variables.$grey-4;
+            }
+            b {
+                color: variables.$grey-6;
+            }
+        }
+        &-actions-container {
+            display: flex;
+            justify-content: space-between;
+            &-left {
+                display: flex;
+                gap: 12px;
+                button {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 9px 16px;
+                }
+            }
+        }
+        &-question-text-container { // this will go for code blocks
+            padding: 10px;
+            border: 1px solid variables.$grey-3;
+            border-radius: 12px;
+            background-color: variables.$grey-1;
+        }
+        &-answers-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        &-answers-container {
+            background-color: variables.$white;
+            border: 1px solid variables.$grey-3;
+            border-radius: 12px;
+        }
+        &-write-answer-container {
+            display: flex;
+            gap: 20px;
+            padding: 24px 32px;
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                flex-shrink: 0;
+            }
+        }
+        &-fake-input {
+            color: variables.$grey-4;
+            padding: 9px;
+            background-color: variables.$grey-1;
+            border: 1px solid variables.$grey-3;
+            border-radius: 12px;
+            width: 100%;
+        }
+    }
+    &__btn {
+        &-positive-vote {
+            border-color: variables.$primary-color-dark;
+            background-color: transparent;
+            color: variables.$primary-color;
+            border-radius: 42px;
+            svg path{
+                fill: variables.$primary-color;
+            }
+            &.has-voted {
+                background-color: variables.$primary-color;
+                color: variables.$white;
+                svg path{
+                    fill: variables.$white;
+                }
+            }
+        }
+        &-negative-vote {
+            border-color: variables.$cancel;
+            background-color: transparent;
+            color: variables.$cancel;
+            border-radius: 42px;
+            &.has-voted {
+                background-color: variables.$cancel;
+                color: variables.$white;
+                svg path{
+                    fill: variables.$white;
+                }
+            }
+        }
+        &-respond {
+            border-color: variables.$grey-4;
+            background-color: transparent;
+            border-radius: 10px;
+        }
+    }
+}

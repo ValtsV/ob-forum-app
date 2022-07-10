@@ -1,0 +1,38 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    display: block;
+    padding: 40px;
+}
+
+.questions {
+    &__div {
+        &-pinned-questions, &-questions {
+                background-color: variables.$white;
+                border: 1px solid variables.$grey-3;
+                border-radius: 12px;
+            > h2 {
+                padding: 24px;
+            }
+        }
+        &-questions {
+            margin-top: 40px;
+        }
+        &-orderby-options {
+            display: flex;
+            gap: 40px;
+            padding: 0 24px;
+            button {
+                padding: 24px 0;
+                background-color: variables.$white;
+                border-bottom: 2px solid transparent;
+                &:hover {
+                    border-bottom: 2px solid variables.$primary-color-neon;
+                }
+                &.active {
+                    border-bottom: 2px solid variables.$primary-color;
+                }
+            }
+        }
+    }
+}

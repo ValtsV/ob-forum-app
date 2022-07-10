@@ -9,5 +9,6 @@ export interface Question {
     totalNegativeVotes: number,
     totalRespuestas: number,
     user: User,
-    pinned: boolean
+    pinned: boolean,
+    userVote: boolean | null
 }

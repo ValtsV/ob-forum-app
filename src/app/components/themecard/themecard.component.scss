@@ -1,0 +1,73 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    height: 250px;
+    width: 100%;
+    @media (min-width: 860px) { 
+        width: calc(50% - 7.5px)
+     }
+    @media (min-width: 1080px) { 
+        width: calc(33% - 10px)
+     }
+    @media (min-width: 1280px) { 
+        width: calc(25% - 11.25px)
+     }
+    @media (min-width: 1536px) { 
+        width: calc(20% - 12px);
+     }
+}
+
+.themecard {
+    &__a {
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__div {
+        &-upper-container {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 20px;
+            height: 110px;
+            padding: 0px 24px;
+            background-color: variables.$secondary-color-black;
+            color: variables.$white;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid variables.$grey-3;
+            border-bottom: 0;
+        }
+        &-lower-container {
+            display: flex;
+            padding: 24px;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 140px;
+            border: 1px solid variables.$grey-3;
+            border-radius: 0 0 12px 12px;
+            border-top: 0;
+            svg {
+                color: variables.$grey-6;
+            }
+        }
+    }
+    &__title {
+        flex-grow: 1;
+        margin: 0;
+    }
+    &__details-container {
+        display: flex;
+        align-items: center;
+        gap: 6.67px;
+    }
+    &__details {
+        color: variables.$grey-4;
+    }
+    &__icon-container {
+        width: 45px;
+        height: 45px;
+        border-radius: 57px;
+        background-color: red;
+    }
+}

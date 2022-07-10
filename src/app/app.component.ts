@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StorageService } from './service/storage.service';
 import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FileUploadService } from './service/file-upload.service';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +13,30 @@ import * as moment from 'moment';
 export class AppComponent {
   title = 'ob-forum-app';
   isLoggedIn: boolean = false
-  eventBusSub?: Subscription;
-
+  currentRoute!: string
+  headerBg: string = '#F8F8F9'
   
 
-  constructor(private storageService: StorageService) {}
+  constructor(private storageService: StorageService, 
+              private fileService: FileUploadService,
+              private router: Router, 
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     moment.locale('es')
+    this.fileService.setProfileImg(this.storageService.getUser().id)
+    this.router.events.subscribe((res) => { 
+      this.currentRoute = this.router.url
+      this.router.events.subscribe((event: any) => {
+        let r = this.route;
+        while (r.firstChild) {
+            r = r.firstChild
+        }
+        r.params.subscribe(params => {
+          this.router.url.split('/')[1] == 'temas' && params['id'] ? this.headerBg = '#fff' : this.headerBg = '#F8F8F9'
+        });
+      });
+    })
     //  this.isLoggedIn = this.storageService.isLoggedIn()
     this.storageService.isLoggedInBSubject().subscribe(data => {
       this.isLoggedIn = data

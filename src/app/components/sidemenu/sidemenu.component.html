@@ -1,12 +1,26 @@
-<div>
-  <span>HOME Página principal</span>
-  <div>
-    <app-button
-      *ngFor="let course of courses"
-      [icon]="course.avatar"
-      [text]="course.name"
-      [courseId]="course.id"
-      (btnClick)="selectCourse(course)"
-    ></app-button>
-  </div>
+<span class="font-secondary">HOME Página principal</span>
+<hr class="sidemenu__hr" />
+<button class="sidemenu__btn">
+  <h5>Cursos</h5>
+  <svg
+    width="12"
+    height="8"
+    viewBox="0 0 12 8"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1.70703 7.20703L6.00003 2.91403L10.293 7.20703L11.707 5.79303L6.00003 0.0860314L0.293031 5.79303L1.70703 7.20703Z"
+      fill="#A5A8B3"
+    />
+  </svg>
+</button>
+<div class="sidemenu__div">
+  <app-button
+    *ngFor="let course of courses"
+    [icon]="course.avatar"
+    [text]="course.name"
+    [courseId]="course.id"
+    (btnClick)="selectCourse(course)"
+  ></app-button>
 </div>

@@ -1,41 +1,104 @@
-<a routerLink="../../">{{ course?.name }}/{{ theme.title }}</a>
-<div>
-  <div>
-    <span>{{ question?.title }}</span>
-    <span
-      >Subido por @{{ question?.user?.username }} hace
-      {{ timeSincePublished }}</span
-    >
+<div class="question__div-question-container">
+  <div class="question__div-question-header">
+    <div class="question__div-title-container">
+      <a routerLink="../../">{{ course?.name }}/{{ theme.title }}</a>
+      <h1>{{ question?.title }}</h1>
+      <span class="votes-text"
+        >Subido por <b>@{{ question?.user?.username }}</b> hace
+        {{ timeSincePublished }}</span
+      >
+    </div>
+    <button>ICON Seguir pregunta</button>
   </div>
-  <button>ICON Seguir pregunta</button>
-</div>
-<hr />
-<p>
+  <hr />
+
   {{ question?.description }}
-</p>
-<hr />
-<div class="flex">
-  <div>
-    <button type="button" (click)="giveVote(true)">
-      {{ question?.totalPositiveVotes }}
-    </button>
-    <button type="button" (click)="giveVote(false)">
-      {{ question?.totalNegativeVotes }}
-    </button>
-    <button>ICON Responder</button>
+
+  <hr />
+  <div class="question__div-actions-container">
+    <div class="question__div-actions-container-left">
+      <app-btn
+        (click)="giveVote(true)"
+        [svg]="thumbsUp"
+        text="{{ question?.totalPositiveVotes }}"
+      >
+      </app-btn>
+
+      <button
+        type="button"
+        (click)="giveVote(true)"
+        [ngClass]="this.question?.userVote ? 'has-voted' : 'ghost-class'"
+        class="question__btn-positive-vote md-btn-text"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M4 21L5 21L5 8L4 8C2.896 8 2 8.896 2 10L2 19C2 20.104 2.896 21 4 21ZM20 8L13 8L14.122 4.632C14.554 3.337 13.59 2 12.225 2L12 2L7 7.438L7 21L18 21L21.912 12.404C21.937 12.291 21.976 12.114 22 12L22 10C22 8.896 21.104 8 20 8Z"
+            fill="white"
+          />
+        </svg>
+
+        {{ question?.totalPositiveVotes }}
+      </button>
+      <button
+        type="button"
+        (click)="giveVote(false)"
+        [ngClass]="
+          this.question?.userVote === false ? 'has-voted' : 'ghost-class'
+        "
+        class="question__btn-negative-vote md-btn-text"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M20 3L6.693 3C5.864 3 5.112 3.521 4.82 4.298L2.063 11.649C2.021 11.761 2 11.88 2 12L2 14C2 15.103 2.897 16 4 16L9.612 16L8.49 19.367C8.287 19.975 8.389 20.649 8.764 21.169C9.14 21.689 9.746 22 10.388 22L12 22C12.297 22 12.578 21.868 12.769 21.64L17.469 16L20 16C21.103 16 22 15.103 22 14L22 5C22 3.897 21.103 3 20 3ZM11.531 20L10.386 20L11.948 15.316C12.051 15.011 11.999 14.676 11.811 14.415C11.623 14.154 11.321 14 11 14L4 14L4 12.181L6.693 5L16 5L16 14.638L11.531 20ZM18 14L18 5L20 5L20.001 14L18 14Z"
+            fill="#EC555E"
+          />
+        </svg>
+
+        {{ question?.totalNegativeVotes }}
+      </button>
+      <button type="button" class="question__btn-respond md-btn-text">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 2C6.486 2 2 5.589 2 10C2 12.908 3.898 15.515 7 16.934L7 22L12.34 17.995C17.697 17.852 22 14.32 22 10C22 5.589 17.514 2 12 2ZM12 16L11.667 16L9 18L9 15.583L8.359 15.336C5.67 14.301 4 12.256 4 10C4 6.691 7.589 4 12 4C16.411 4 20 6.691 20 10C20 13.309 16.411 16 12 16Z"
+            fill="#121625"
+          />
+          <path
+            d="M13 6L11 6L11 9L8 9L8 11L11 11L11 14L13 14L13 11L16 11L16 9L13 9L13 6Z"
+            fill="#121625"
+          />
+        </svg>
+        Responder
+      </button>
+    </div>
+    <button>Pin this</button>
   </div>
-  <button>Pin this</button>
 </div>
-<div class="flex">
-  <span>{{ answers.length }} respuestas</span>
-  <button>Ordenar</button>
-  <button (click)="orderByDate()">Actualización</button>
-  <button (click)="orderByVotes()">Más popular</button>
+<div class="question__div-answers-options">
+  <h2>{{ answers.length }} respuestas</h2>
+  <div>
+    <button>Ordenar</button>
+    <button (click)="orderByDate()">Actualización</button>
+    <button (click)="orderByVotes()">Más popular</button>
+  </div>
 </div>
-<div>
-  <app-answer *ngFor="let answer of answers" [answer]="answer"></app-answer>
-  <div class="flex">
-    <span> ICON </span>
-    <app-tiptap (emitHtml)="saveAnswer($event)"></app-tiptap>
+<div class="question__div-answers-container">
+  <app-answer
+    *ngFor="let answer of answers"
+    [answer]="answer"
+    (voteEvent)="voteForAnswer($event)"
+  ></app-answer>
+  <div class="question__div-write-answer-container">
+    <img [src]="img" />
+    <div
+      *ngIf="!writingModeOn"
+      (click)="toggleWritingMode()"
+      class="question__div-fake-input p-text"
+    >
+      Escribe una respuesta
+    </div>
+    <app-tiptap
+      *ngIf="writingModeOn"
+      (emitHtml)="saveAnswer($event)"
+    ></app-tiptap>
   </div>
 </div>

@@ -1,1 +1,146 @@
-/* You can add global styles to this file, and also import other style files */
+// // COLORS
+// @use './variables';
+
+// body {
+//     padding: 0;
+//     margin: 0;
+//     box-sizing: border-box;
+//     background-color: variables.$grey-1;
+
+//     button {
+//         padding: 0;
+//         border: 0;
+//     }
+
+//     // FONTS
+//     font-family: 'Inter', sans-serif;
+//     color: variables.$black;
+
+//     h1 {
+//         font-weight: 700;
+//         font-size: 24px;
+//     }
+
+//     h2 {
+//         font-size: 18px;
+
+//         .uppertitle {
+//             font-weight: 600;
+//             font-size: 14px;
+//         }
+//     }
+
+//     h3 {
+//         font-size: 21px;
+//         line-height: 93.4%;
+
+//         .uppertitle {
+//             font-weight: 600;
+//             font-size: 13px;
+//             line-height: normal;
+//         }
+//     }
+
+//     h4 {
+//         font-weight: 600;
+//         letter-spacing: -1%;
+//         line-height: 100%;
+
+//         .uppertitle {
+//             font-weight: 700;
+//             letter-spacing: 11.5%;
+//             line-height: auto;
+//         }
+//     }
+
+//     h5 {
+//         font-size: 14px;
+//         letter-spacing: -1%;
+//     }
+
+//     .lg-btn-text {
+//         font-weight: 700;
+//         line-height: 22px;
+//         font-size: 18px;
+//         letter-spacing: -0.41px;
+//     }
+
+//     .md-btn-text {
+//         font-weight: 700;
+//         line-height: 22px;
+//         font-size: 16px;
+//         letter-spacing: -0.41px;
+//     }
+
+//     .sm-btn-text {
+//         font-weight: 700;
+//         line-height: 16px;
+//         font-size: 13px;
+//         letter-spacing: -0.08px;
+//     }
+
+//     .input-text {
+//         font-weight: 500;
+//         font-size: 16px;
+//         line-height: 160%;
+//         letter-spacing: 0.5%;
+//     }
+
+//     .icon-select-text {
+//         font-weight: 400;
+//         font-size: 15px;
+//         line-height: 160%;
+//         letter-spacing: 0.5%;
+//     }
+
+//     .card-title {
+//         font-weight: 600;
+//         font-size: 18px;
+//         letter-spacing: -0.5%;
+
+//         .px16 {
+//             font-size: 16px;
+//             letter-spacing: -1%;
+//             line-height: 125%;
+//         }
+//     }
+
+//     .card-details {
+//         font-weight: 400;
+//         font-size: 14px;
+
+//         .px13 {
+//             font-weight: 500;
+//             font-size: 13px;
+//             line-height: 16px;
+//             letter-spacing: -0.08px;
+//         }
+//     }
+
+//     .sidebar-btn-text {
+//         font-weight: 600;
+//         font-size: 14px;
+//     }
+
+//     .p-text {
+//         font-weight: 400;
+//         font-size: 15px;
+//         line-height: 150%;
+
+//         .px18 {
+//             font-size: 18px;
+//         }
+//     }
+// }
+
+// .flex {
+//     display: flex;
+// }
+
+// .flex-grow {
+//     flex-grow: 1;
+// }
+
+// .y-center {
+//     align-items: center;
+// }

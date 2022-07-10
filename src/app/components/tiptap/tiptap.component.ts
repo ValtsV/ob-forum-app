@@ -26,6 +26,10 @@ export class TiptapComponent implements OnInit {
         limit: 4000
       })
     ],
+    editorProps: {
+      attributes: {
+        class: 'prose'
+    }}
   })
   value: string = '<p>Hello, Tiptap!</p>'
   html: string = ''

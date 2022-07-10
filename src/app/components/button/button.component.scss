@@ -1,0 +1,14 @@
+.app-btn {
+    &__btn {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    &__img {
+        width: 28px;
+    }
+}

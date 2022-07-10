@@ -1,0 +1,39 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 20px;
+    width: 275px;
+}
+
+.sidemenu {
+    &__hr {
+        margin: 0;
+        color: variables.$grey-3;
+        border-top: 0;
+    }
+
+    &__btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: none;
+        h5 {
+            margin: 0;
+        }
+    }
+
+    &__div {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-family: 'Raleway', sans-serif;
+    }
+
+
+}
+
+
+

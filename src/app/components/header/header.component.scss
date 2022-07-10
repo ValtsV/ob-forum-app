@@ -1,0 +1,46 @@
+
+@use '../../../styles/abstracts/variables';
+@use '../../../styles/base/typography';
+
+:host {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    align-items: center;
+}
+
+.app-header {
+    &__svg-ob-logo {
+        margin-right: 20px;
+    }
+
+    &__h1, &__div {
+        flex-grow: 1;
+    }
+
+    &__a {
+        display: inline-flex;
+        gap: 8px;
+        background-color: variables.$grey-3;
+        padding: 10px 16px;
+        border-radius: 10px;
+       
+    }
+
+    &__btn-user-info {
+        display: flex;
+        align-items: center;    
+        background-color: variables.$white;
+        height: 40px;
+        border-radius: 40px;
+        img {
+            width: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        svg {
+            color: variables.$grey-4;
+            padding: 10px;
+        }
+    }
+}

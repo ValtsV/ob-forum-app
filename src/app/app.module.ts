@@ -24,6 +24,7 @@ import { HttpRequestInterceptor } from './_helpers/http-request.interceptor';
 import { NgxTiptapModule } from 'ngx-tiptap';
 import { TiptapComponent } from './components/tiptap/tiptap.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { BtnComponent } from './components/btn/btn.component';
  
 
 
@@ -45,7 +46,8 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
     AddQuestionComponent,
     LoginComponent,
     TiptapComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    BtnComponent
         ],
   imports: [
     BrowserModule,

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Answer } from 'src/app/Answer';
 import { AnswerService } from 'src/app/service/answer.service';
 import * as moment from 'moment';
+import { FileUploadService } from 'src/app/service/file-upload.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -11,29 +13,22 @@ import * as moment from 'moment';
 })
 export class AnswerComponent implements OnInit {
   @Input() answer: Answer = {} as Answer
+  img: any
   timeSincePublished!: string
+  @Output() voteEvent = new EventEmitter<{vote: boolean, id: number}>()
 
-  constructor(private answerService: AnswerService) { }
+  constructor(private fileService: FileUploadService, protected sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.timeSincePublished = moment(this.answer.updatedAt).fromNow()
+    this.fileService.getProfileImg(this.answer.user.id).subscribe((base64ImageUrl: string) => {
+      this.img =
+        this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
+    });
   }
 
+
   giveVote(vote: boolean) {
-    const voteType = vote? 'totalPositiveVotes' : 'totalNegativeVotes'
-    
-    this.answerService.vote(this.answer.id!, vote).subscribe({
-      next: (data) => {
-        if (data.status == 204) {
-          const updatedAnswer = {...this.answer, [voteType]:  this.answer[voteType] - 1}
-          this.answer =  updatedAnswer
-        }
-        if (data.status == 200) {
-          const updatedAnswer = {...this.answer, [voteType]:  this.answer[voteType] + 1}
-          this.answer =  updatedAnswer
-        }
-      },
-      error: error => console.log(error.status)
-    })
+    this.voteEvent.emit({vote, id: this.answer.id!})
   }
 }

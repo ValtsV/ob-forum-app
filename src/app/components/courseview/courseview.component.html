@@ -1,15 +1,15 @@
-<div>
-  Red background
-  <div>
-    <div class="flex">
-      <img [ngStyle]="{ width: '50px' }" [src]="courseImg" />
+<div class="app-courseview__div-angular-color">
+  <div class="app-courseview__div-content-wrapper">
+    <div class="app-courseview__div-upper-content">
+      <div class="app-courseview__div-img-wrapper">
+        <img [src]="courseImg" />
+      </div>
       <h2>{{ title }}</h2>
-      <!-- flex grow here -->
       <button>Siguiendo</button>
     </div>
 
     <hr />
-    <div class="flex">
+    <div class="app-courseview__div-lower-content">
       <span>INPUT</span>
       <!-- button title changes depending on chosen option  -->
       <button>Ordenar por</button>
@@ -20,6 +20,6 @@
     </div>
   </div>
 </div>
-<div class="flex">
+<div class="themecards-container">
   <app-themecard *ngFor="let theme of themes" [theme]="theme"></app-themecard>
 </div>

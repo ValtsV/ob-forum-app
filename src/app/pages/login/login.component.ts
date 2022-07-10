@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { CourseService } from 'src/app/service/course.service';
+import { FileUploadService } from 'src/app/service/file-upload.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { UserService } from 'src/app/service/user.service';
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
               private storageService: StorageService, 
               private authService: AuthService, 
               private courseService: CourseService, 
+              private fileService: FileUploadService,
               private router: Router, 
               private route: ActivatedRoute, 
               private fb: FormBuilder) {

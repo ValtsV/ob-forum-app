@@ -1,0 +1,41 @@
+@use '../../../styles/abstracts/variables';
+
+:host {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    background-color: variables.$black-dark-mode;
+}
+
+.questions-header-left{
+    &__flex-container {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    &__div {
+        display: flex;
+        gap: 15px;
+        img {
+            width: 61px;
+            height: 61px;
+        }
+        &-description {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        &-details {
+            display: flex;
+            align-items: center;
+            gap: 6.67px;
+            color: variables.$grey-4;
+            svg {
+                color: variables.$grey-6;
+            }
+    }
+    }
+    
+    
+}
