@@ -1,7 +1,8 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { StorageService } from 'src/app/service/storage.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -14,8 +15,10 @@ export class ImageUploadComponent implements OnInit {
   progress = 0;
   message = '';
 
-  constructor(private uploadService: FileUploadService, 
-              private storageService: StorageService) { }
+  constructor(
+    private uploadService: FileUploadService, 
+    private storageService: StorageService,
+    private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -25,40 +28,18 @@ export class ImageUploadComponent implements OnInit {
   }
 
   upload(): void {
-    this.uploadService.setProfileImgAsUploading()
-    // this.isUploading(true);
-    this.progress = 0;
-    if (this.selectedFile) {
-      const file: File | null = this.selectedFile;
-      if (file) {
-        this.currentFile = file;
-        this.uploadService.upload(this.currentFile).subscribe({
-          next: (event: any) => {
-            if (event.type === HttpEventType.UploadProgress) {
-              this.progress = Math.round(100 * event.loaded / event.total);
-            } else if (event instanceof HttpResponse) {
-              this.message = 'Success'
-              this.uploadService.setProfileImg(this.storageService.getUser().id)
-              // this.isUploading(false)
 
-            }
-          },
-          error: (err: any) => {
-            this.progress = 0;
-            if (err.error && err.error.message) {
-              this.message = err.error.message;
-            } else {
-              this.message = 'Could not upload the file!';
-            }
-            this.currentFile = undefined;
-          }
-        });
-      }
-      this.selectedFile = undefined;
+    if (this.selectedFile) {
+
+      this.currentFile = this.selectedFile;
+      this.uploadService.upload(this.currentFile).subscribe(response => {
+        if (response.type === 4) {
+          const id = this.storageService.getUser().id
+          this.userService.refreshUser(id);
+          this.message = 'Success'
+        }
+      })
     }
   }
   
-  // isUploading(value: boolean) {
-  //   this.uploadingImageEvent.emit(value);
-  // }
 }

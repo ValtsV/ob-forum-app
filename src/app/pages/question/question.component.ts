@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { thumbsUp } from 'src/assets/svg/icons';
+import { StorageService } from 'src/app/service/storage.service';
 
 @Component({
   selector: 'app-question',
@@ -30,7 +31,14 @@ export class QuestionComponent implements OnInit {
   thumbsUp: any = "assets/thumbs-up.svg"
 
 
-  constructor(private questionService: QuestionService, private answerService: AnswerService, private themeService: ThemeService, private courseService: CourseService, private fileService: FileUploadService, protected sanitizer: DomSanitizer, private route: ActivatedRoute) { }
+  constructor(
+    private questionService: QuestionService, 
+    private answerService: AnswerService, 
+    private themeService: ThemeService, 
+    private courseService: CourseService, 
+    private storageService: StorageService,
+    protected sanitizer: DomSanitizer, 
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
@@ -45,8 +53,7 @@ export class QuestionComponent implements OnInit {
       this.timeSincePublished = moment(question.updatedAt).fromNow()
     })
     this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => this.answers = answers)
-
-    this.fileService.profileImg$.subscribe(img => this.img = img)
+    this.storageService.currentUser.subscribe(user => this.img = user.avatar)
   }
 
 

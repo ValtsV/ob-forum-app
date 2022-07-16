@@ -13,7 +13,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AnswerComponent implements OnInit {
   @Input() answer: Answer = {} as Answer
-  img: any
   timeSincePublished!: string
   @Output() voteEvent = new EventEmitter<{vote: boolean, id: number}>()
 
@@ -21,10 +20,6 @@ export class AnswerComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeSincePublished = moment(this.answer.updatedAt).fromNow()
-    this.fileService.getProfileImg(this.answer.user.id).subscribe((base64ImageUrl: string) => {
-      this.img =
-        this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
-    });
   }
 
 

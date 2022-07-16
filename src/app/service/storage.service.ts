@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable , of, Subject} from 'rxjs';
+import { User } from '../User';
 
 const TOKEN_KEY = "auth-token"
 const USER_KEY = 'auth-user';
@@ -10,6 +11,7 @@ const USER_KEY = 'auth-user';
 export class StorageService {
 
   isLogged = new BehaviorSubject<boolean>(this.getUser())
+  currentUser = new BehaviorSubject<User>(this.getUser())
 
   constructor(private router: Router) { }
 
@@ -36,6 +38,7 @@ export class StorageService {
   public saveUser(user: any): void {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    this.currentUser.next(this.getUser())
   }
 
   public getUser(): any {
@@ -46,6 +49,8 @@ export class StorageService {
     }
     return false;
   }
+
+  
 
   // TOKEN
   public saveToken(token: string): void {

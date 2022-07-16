@@ -12,7 +12,6 @@ import { FileUploadService } from 'src/app/service/file-upload.service';
 export class SidemenuComponent implements OnInit {
   courses: Course[] = [];
   selectedCourse: Course = {} as Course
-  courseImg!: any
 
   constructor(private courseService: CourseService, private fileService: FileUploadService, protected sanitizer: DomSanitizer) {   }
 

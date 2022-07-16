@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ThemeService } from 'src/app/service/theme.service';
 import { Theme } from 'src/app/Theme';
 import { Course } from 'src/app/Course';
@@ -28,10 +27,8 @@ export class QuestionsHeaderComponent implements OnInit {
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => {
         this.course = course
-        this.fileService.getCourseImg(course.id).subscribe((base64ImageUrl: string) => {
-          this.courseImg =
-            this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
-        });      
+        this.courseImg = course.avatar
+           
       })
     })
   }

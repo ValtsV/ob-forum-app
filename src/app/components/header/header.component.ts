@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
   constructor(private storageService: StorageService, private fileService: FileUploadService, protected sanitizer: DomSanitizer, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    const user = this.storageService.getUser()
-    this.user = user
-    this.fileService.profileImg$.subscribe(img => this.img = img)
+    this.storageService.currentUser.subscribe(user => {
+      this.user = user
+    })
   }
 }

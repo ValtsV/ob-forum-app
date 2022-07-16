@@ -20,9 +20,9 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     
-        this.fileService.getCourseImg(this.courseId).subscribe((base64ImageUrl: string) => {
-          this.image= this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
-        });
+        // this.fileService.getCourseImg(this.courseId).subscribe((base64ImageUrl: string) => {
+        //   this.image= this.sanitizer.bypassSecurityTrustResourceUrl(base64ImageUrl);
+        // });
       
   }
 

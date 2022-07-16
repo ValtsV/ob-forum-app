@@ -1,5 +1,8 @@
 <div class="answer__div-answer-details-container">
-  <img [src]="img" class="answer__img-answer-author-profile-img" />
+  <img
+    [src]="answer.user.avatar"
+    class="answer__img-answer-author-profile-img"
+  />
   <div class="answer__div-answer-details">
     <h4>
       {{ answer.user.username }}
