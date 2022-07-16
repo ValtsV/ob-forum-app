@@ -70,7 +70,9 @@
         Responder
       </button>
     </div>
-    <button>Pin this</button>
+    <button *ngIf="currentUser.roles.includes('ADMIN')" (click)="pinQuestion()">
+      Pin this
+    </button>
   </div>
 </div>
 <div class="question__div-answers-options">

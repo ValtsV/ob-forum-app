@@ -8,7 +8,8 @@ export interface Question {
     totalPositiveVotes: number,
     totalNegativeVotes: number,
     totalRespuestas: number,
-    user: User,
     pinned: boolean,
-    userVote: boolean | null
+    userVote: boolean | null,
+    user: User
+    
 }

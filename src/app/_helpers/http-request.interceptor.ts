@@ -24,9 +24,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     req = req.clone({
       withCredentials: true
     });
-    // return next.handle(req);
-
-    
 
       return next.handle(req).pipe(catchError(error => {
       if (error instanceof HttpErrorResponse && !req.url.includes('auth/login') && error.status === 401) {

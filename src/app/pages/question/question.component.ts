@@ -13,6 +13,7 @@ import { FileUploadService } from 'src/app/service/file-upload.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { thumbsUp } from 'src/assets/svg/icons';
 import { StorageService } from 'src/app/service/storage.service';
+import { User } from 'src/app/User';
 
 @Component({
   selector: 'app-question',
@@ -27,6 +28,7 @@ export class QuestionComponent implements OnInit {
   timeSincePublished!: string
   writingModeOn: boolean = false
   img!: any
+  currentUser: User = {} as User
 
   thumbsUp: any = "assets/thumbs-up.svg"
 
@@ -44,11 +46,13 @@ export class QuestionComponent implements OnInit {
     const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
     const themeId = Number(this.route.snapshot.paramMap.get('themeId'))
 
+    this.storageService.currentUser.subscribe(user => this.currentUser = user)
+
     this.themeService.getTheme(themeId).subscribe(theme => {
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
     })
-    this.questionService.getQuestionById(questionId).subscribe(question => {
+    this.questionService.getQuestionById(questionId).subscribe((question: any) => {
       this.question = question
       this.timeSincePublished = moment(question.updatedAt).fromNow()
     })
@@ -78,10 +82,7 @@ export class QuestionComponent implements OnInit {
         this.answers[oldIndex].totalPositiveVotes = updatedAnswer[0].totalPositiveVotes
         this.answers[oldIndex].userVote = updatedAnswer[0].userVote
         })
-      
       })
-    
-    
   }
 
   saveAnswer(answerHtml: string) {
@@ -99,5 +100,12 @@ export class QuestionComponent implements OnInit {
 
   toggleWritingMode() {
     this.writingModeOn = !this.writingModeOn
+  }
+
+  pinQuestion() {
+    const newQuestion = {...this.question, pinned: !this.question.pinned}
+    this.questionService.updateQuestion(newQuestion).subscribe((res: any) => {
+      this.question = res
+    })
   }
 }

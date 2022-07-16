@@ -1,6 +1,6 @@
 export interface QuestionRequest {
     description: string,
     title: string,
-    pinned: boolean,
+    isPinned: boolean,
     temaId: number
 }
