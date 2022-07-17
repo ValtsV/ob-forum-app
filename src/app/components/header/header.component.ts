@@ -16,13 +16,22 @@ export class HeaderComponent implements OnInit {
   profileImageSrc!: string
   img!: any
   @Input() currentRoute!: string
+  showUserMenu: boolean = false
 
 
-  constructor(private storageService: StorageService, private fileService: FileUploadService, protected sanitizer: DomSanitizer, private router: Router, private userService: UserService) { }
+  constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.storageService.currentUser.subscribe(user => {
       this.user = user
     })
+  }
+
+  toggleUserMenu() {
+    this.showUserMenu = !this.showUserMenu
+  }
+
+  logout() {
+    this.storageService.logout()
   }
 }

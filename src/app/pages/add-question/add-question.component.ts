@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/Course';
 import { CourseService } from 'src/app/service/course.service';
@@ -9,11 +10,17 @@ import { Theme } from 'src/app/Theme';
 @Component({
   selector: 'app-add-question',
   templateUrl: './add-question.component.html',
-  styleUrls: ['./add-question.component.scss']
+  styleUrls: ['./add-question.component.scss', '../../app.component.scss']
 })
 export class AddQuestionComponent implements OnInit {
   theme: Theme = {} as Theme
   course: Course = {} as Course
+
+  newQuestionForm = new FormGroup({
+    title: new FormControl(''),
+    theme: new FormControl(''),
+    description: new FormControl(''),
+  });
  
 
   constructor(private themeService: ThemeService, private courseService: CourseService, private questionService: QuestionService, private route: ActivatedRoute) { }

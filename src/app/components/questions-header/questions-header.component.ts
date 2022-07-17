@@ -6,6 +6,8 @@ import { Course } from 'src/app/Course';
 import { CourseService } from 'src/app/service/course.service';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { StorageService } from 'src/app/service/storage.service';
+import { User } from 'src/app/User';
 
 @Component({
   selector: 'app-questions-header',
@@ -17,9 +19,10 @@ export class QuestionsHeaderComponent implements OnInit {
   courseImg!: any
   theme: Theme = {} as Theme
   themeId!: number
+  currentUser: User = {} as User
 
 
-  constructor(private themeService: ThemeService, private courseService: CourseService, private fileService: FileUploadService, private sanitizer: DomSanitizer, private route: ActivatedRoute) {}
+  constructor(private themeService: ThemeService, private courseService: CourseService, private storageService: StorageService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.themeId = Number(this.route.snapshot.paramMap.get('id'));
@@ -31,6 +34,7 @@ export class QuestionsHeaderComponent implements OnInit {
            
       })
     })
+    this.storageService.currentUser.subscribe(user => this.currentUser = user)
   }
 
 

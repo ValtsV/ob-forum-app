@@ -1,7 +1,21 @@
-<div>
-  <h1>Escribe tu pregunta sobre {{ theme.title }} de {{ course.name }}</h1>
-  <hr />
-  <span>PREGUNTA DETAILS</span>
-
-  <app-tiptap (emitHtml)="saveQuestion($event)"></app-tiptap>
-</div>
+<h1>Escribe tu pregunta sobre {{ theme.title }} de {{ course.name }}</h1>
+<hr class="add-question__hr" />
+<form [formGroup]="newQuestionForm" class="add-question__form">
+  <div class="add-question__div-title-container">
+    <label for="title"><h4>Título pregunta</h4></label>
+    <input id="title" type="text" formControlName="newQuestionForm" />
+  </div>
+  <div class="add-question__div-category-container">
+    <label for="theme"><h4>Categoría</h4></label>
+    <select id="theme" type="select" formControlName="newQuestionForm">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
+  </div>
+  <div class="add-question__div-content-container">
+    <h4>Contenido</h4>
+    <app-tiptap (emitHtml)="saveQuestion($event)"></app-tiptap>
+  </div>
+</form>

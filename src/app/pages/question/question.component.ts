@@ -9,7 +9,6 @@ import { ThemeService } from 'src/app/service/theme.service';
 import { Theme } from 'src/app/Theme';
 import { AnswerService } from 'src/app/service/answer.service';
 import * as moment from 'moment';
-import { FileUploadService } from 'src/app/service/file-upload.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { thumbsUp } from 'src/assets/svg/icons';
 import { StorageService } from 'src/app/service/storage.service';
@@ -103,9 +102,14 @@ export class QuestionComponent implements OnInit {
   }
 
   pinQuestion() {
-    const newQuestion = {...this.question, pinned: !this.question.pinned}
-    this.questionService.updateQuestion(newQuestion).subscribe((res: any) => {
+    this.questionService.updateQuestion({...this.question, pinned: !this.question.pinned}).subscribe((res: any) => {
       this.question = res
+    })
+  }
+
+  pinAnswer(answer: Answer) {
+    this.answerService.updateAnswer({...answer, pinned: !answer.pinned}).subscribe((res: any) => {
+      this.answers = res
     })
   }
 }

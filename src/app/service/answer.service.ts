@@ -23,6 +23,10 @@ export class AnswerService {
     return this.http.post('http://localhost:3333/foro/respuestas', answerRequest)
   }
 
+  updateAnswer(answer: Answer): Observable<Answer> {
+    return this.http.put<Answer>('http://localhost:3333/foro/respuestas', answer)
+  }
+
   vote(answerId: number, vote: boolean): Observable<any> {
     const data = {vote: vote}
     return this.http.post('http://localhost:3333/foro/votos/respuestas/' + answerId, data, {observe: 'response' as 'body'})

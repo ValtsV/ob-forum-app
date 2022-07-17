@@ -101,9 +101,14 @@
   </div>
 </div>
 <div class="tiptap__div-editor-container">
-  <tiptap-editor *ngIf="!isPreviewOn" [editor]="editor" [(ngModel)]="value">
+  <tiptap-editor
+    *ngIf="!isPreviewOn; else previsualizeBlock"
+    [editor]="editor"
+    [(ngModel)]="value"
+  >
   </tiptap-editor>
 </div>
-
-<div *ngIf="isPreviewOn">A ver si luego pienso qué hacer con la preview</div>
+<ng-template #previsualizeBlock>
+  <div>A ver si luego pienso qué hacer con la preview</div>
+</ng-template>
 <button (click)="emitTiptapHtml()">Subir pregunta</button>

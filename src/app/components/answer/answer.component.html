@@ -9,7 +9,7 @@
     </h4>
     <span class="card-details">Publicado hace {{ timeSincePublished }}</span>
   </div>
-  <div>
+  <div *ngIf="answer.pinned">
     <span>icon</span>
     Fijado por mods
   </div>
@@ -61,7 +61,8 @@
           {{ answer.totalNegativeVotes }}
         </button>
       </div>
-      <button>Pin it</button>
+
+      <button *ngIf="canPin" (click)="pinAnswer()">Pin it</button>
     </div>
   </div>
 </div>

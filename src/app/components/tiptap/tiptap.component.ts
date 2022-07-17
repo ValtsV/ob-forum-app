@@ -8,7 +8,7 @@ import CharacterCount from '@tiptap/extension-character-count';
 @Component({
   selector: 'app-tiptap',
   templateUrl: './tiptap.component.html',
-  styleUrls: ['./tiptap.component.scss']
+  styleUrls: ['./tiptap.component.scss', '../../app.component.scss']
 })
 export class TiptapComponent implements OnInit {
   editor = new Editor({

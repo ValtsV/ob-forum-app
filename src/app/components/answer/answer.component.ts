@@ -4,6 +4,7 @@ import { AnswerService } from 'src/app/service/answer.service';
 import * as moment from 'moment';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { User } from 'src/app/User';
 
 
 @Component({
@@ -13,8 +14,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AnswerComponent implements OnInit {
   @Input() answer: Answer = {} as Answer
+  @Input() canPin: boolean = false
   timeSincePublished!: string
   @Output() voteEvent = new EventEmitter<{vote: boolean, id: number}>()
+  @Output() pinEvent = new EventEmitter<Answer>()
 
   constructor(private fileService: FileUploadService, protected sanitizer: DomSanitizer) { }
 
@@ -25,5 +28,9 @@ export class AnswerComponent implements OnInit {
 
   giveVote(vote: boolean) {
     this.voteEvent.emit({vote, id: this.answer.id!})
+  }
+
+  pinAnswer() {
+    this.pinEvent.emit(this.answer)
   }
 }

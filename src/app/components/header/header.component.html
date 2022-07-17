@@ -22,7 +22,11 @@
 </svg>
 <h1 *ngIf="currentRoute == '/temas'" class="app-header__h1">Open Bootcamp</h1>
 <div class="app-header__div">
-  <a *ngIf="currentRoute != '/temas'" class="app-header__a md-btn-text">
+  <a
+    *ngIf="currentRoute != '/temas'"
+    routerLink=".."
+    class="app-header__a md-btn-text"
+  >
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
         d="M20.9999 11L6.41394 11L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13L20.9999 13L20.9999 11Z"
@@ -34,15 +38,22 @@
 </div>
 <span>SEARCH INPUT</span>
 
-<button class="app-header__btn-user-info sidebar-btn-text">
-  <img [src]="user.avatar" />
-  {{ user.username }}
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <path
-      d="M13.5775 7.74414L9.99997 11.3216L6.42247 7.74414L5.24414 8.92247L9.99997 13.6783L14.7558 8.92247L13.5775 7.74414Z"
-      fill="#A5A8B3"
-    />
-  </svg>
-</button>
-
-<app-image-upload></app-image-upload>
+<div class="app-header__div-dropdown">
+  <button
+    (click)="toggleUserMenu()"
+    class="app-header__btn-user-info sidebar-btn-text"
+  >
+    <img [src]="user.avatar" />
+    {{ user.username }}
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path
+        d="M13.5775 7.74414L9.99997 11.3216L6.42247 7.74414L5.24414 8.92247L9.99997 13.6783L14.7558 8.92247L13.5775 7.74414Z"
+        fill="#A5A8B3"
+      />
+    </svg>
+  </button>
+  <div *ngIf="showUserMenu" class="app-header__div-dropdown-content">
+    <app-image-upload></app-image-upload>
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>

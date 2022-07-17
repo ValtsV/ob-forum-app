@@ -18,13 +18,25 @@
         flex-grow: 1;
     }
 
+    &__div {
+        &-dropdown-content {
+                position: absolute;
+                right: 10px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        &-dropdown {
+                display: inline-block;
+                position: relative;
+        }
+    }
+
     &__a {
         display: inline-flex;
         gap: 8px;
         background-color: variables.$grey-3;
         padding: 10px 16px;
-        border-radius: 10px;
-       
+        border-radius: 10px;    
     }
 
     &__btn-user-info {

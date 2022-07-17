@@ -23,5 +23,5 @@
 <div>
   <button>Seguir</button>
   <a routerLink="./pregunta-nueva">Añadir pregunta</a>
-  <button>Pin it</button>
+  <button *ngIf="currentUser.roles.includes('ADMIN')">Pin it</button>
 </div>
