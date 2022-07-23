@@ -12,7 +12,7 @@
   </div>
   <hr />
 
-  {{ question?.description }}
+  <div [innerHtml]="question?.description"></div>
 
   <hr />
   <div class="question__div-actions-container">
@@ -81,7 +81,7 @@
   </div>
 </div>
 <div class="question__div-answers-options">
-  <h2>{{ answers.length }} respuestas</h2>
+  <h2>{{ hasAnswers ? answers.length : 0 }} respuestas</h2>
   <div>
     <button>Ordenar</button>
     <button (click)="orderByDate()">Actualización</button>

@@ -25,14 +25,17 @@ export class QuestionService {
     return this.http.get<Question>('http://localhost:3333/foro/preguntas/' + questionId)
   }
 
-  saveQuestion(questionHtml: string, themeId: number): Observable<any> {
-    const questionRequest: QuestionRequest = {
-      description: questionHtml,
-    title: "Pregunta title",
-    isPinned: false,
-    temaId: themeId
-    }
-    return this.http.post('http://localhost:3333/foro/preguntas', questionRequest)
+  // saveQuestion(questionHtml: string, themeId: number): Observable<any> {
+  //   const questionRequest: QuestionRequest = {
+  //     description: questionHtml,
+  //   title: "Pregunta title",
+  //   isPinned: false,
+  //   temaId: themeId
+  //   }
+  //   return this.http.post('http://localhost:3333/foro/preguntas', questionRequest)
+  // }
+  saveQuestion(newQuestion: QuestionRequest): Observable<any> {
+    return this.http.post('http://localhost:3333/foro/preguntas', newQuestion)
   }
 
   vote(questionId: number, vote: boolean): Observable<any> {

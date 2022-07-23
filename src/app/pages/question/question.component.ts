@@ -22,6 +22,7 @@ import { User } from 'src/app/User';
 export class QuestionComponent implements OnInit {
   question: Question = {} as Question
   answers: Answer[] = []
+  hasAnswers: boolean = false
   theme: Theme = {} as Theme
   course?: Course = {} as Course
   timeSincePublished!: string
@@ -55,7 +56,12 @@ export class QuestionComponent implements OnInit {
       this.question = question
       this.timeSincePublished = moment(question.updatedAt).fromNow()
     })
-    this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => this.answers = answers)
+    this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => {
+      this.answers = answers
+      if (answers != null) {
+        this.hasAnswers = true
+      }
+    })
     this.storageService.currentUser.subscribe(user => this.img = user.avatar)
   }
 
