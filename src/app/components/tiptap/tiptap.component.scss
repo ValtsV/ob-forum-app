@@ -2,7 +2,6 @@
 
 :host {
     border: 1px solid variables.$grey-3;
-
     border-radius: 15px;
     width: 100%;
     ::ng-deep tiptap-editor .ProseMirror {
@@ -12,6 +11,7 @@
         border-radius: 12px;
     }
 }
+
 
 .tiptap {
     &__div {
@@ -44,6 +44,14 @@
         }
         &-editor-container {
             padding: 12px;
+        }
+        &-preview-container {
+            padding-top: 11px;
+            padding-bottom: 11px;
+            code {
+                background-color: variables.$grey-1;
+                border: 1px solid variables.$grey-3;
+            }
         }
     }
     &__btn {

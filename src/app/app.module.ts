@@ -25,6 +25,7 @@ import { NgxTiptapModule } from 'ngx-tiptap';
 import { TiptapComponent } from './components/tiptap/tiptap.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { BtnComponent } from './components/btn/btn.component';
+import { InnerHtmlComponent } from './components/inner-html/inner-html.component';
  
 
 
@@ -47,7 +48,8 @@ import { BtnComponent } from './components/btn/btn.component';
     LoginComponent,
     TiptapComponent,
     ImageUploadComponent,
-    BtnComponent
+    BtnComponent,
+    InnerHtmlComponent
         ],
   imports: [
     BrowserModule,

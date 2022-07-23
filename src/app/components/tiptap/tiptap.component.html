@@ -132,9 +132,8 @@
   </tiptap-editor>
 </div>
 <ng-template #previsualizeBlock>
-  <div>
-    A ver si luego pienso qué hacer con la preview. Jolín, ya no me acuerdo que
-    iba a hacer con la preview
-  </div>
+  <!-- <div class="tiptap__div-preview-container" [innerHtml]="html"></div> -->
+  <!-- <app-tiptap-preview [preview]="html"></app-tiptap-preview> -->
+  <app-inner-html [html]="html"></app-inner-html>
 </ng-template>
 <button (click)="emitTiptapHtml()">Subir pregunta</button>

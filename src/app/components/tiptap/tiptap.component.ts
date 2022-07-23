@@ -1,11 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
-import { ControlContainer, ControlValueAccessor, FormGroup, NgForm, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-tiptap',

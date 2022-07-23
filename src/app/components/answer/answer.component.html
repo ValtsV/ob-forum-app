@@ -28,8 +28,8 @@
     *ngIf="!answer.pinned"
     [ngStyle]="{ width: '40px', 'flex-shrink': 0 }"
   ></div>
-  <div class="answer__div-answer-text-container">
-    <div [innerHtml]="answer.answer"></div>
+  <div class="answer__div-answer-inner-container">
+    <app-inner-html [html]="answer.answer"></app-inner-html>
 
     <div class="answer__div-options">
       <div class="answer__div-vote-options">

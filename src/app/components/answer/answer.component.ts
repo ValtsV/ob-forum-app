@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Answer } from 'src/app/Answer';
-import { AnswerService } from 'src/app/service/answer.service';
 import * as moment from 'moment';
-import { FileUploadService } from 'src/app/service/file-upload.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { User } from 'src/app/User';
 
 
 @Component({

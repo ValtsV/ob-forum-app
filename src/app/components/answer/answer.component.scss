@@ -23,11 +23,19 @@
                 color: variables.$grey-4;
             }
         }
+        &-answer-text-container {
+            pre {
+                padding: 10px;
+                background-color: variables.$grey-1;
+                border: 1px solid variables.$grey-3;
+                border-radius: 12px;
+            }
+        }
         &-answer-section {
             display: flex;
             gap: 20px;
         }
-        &-answer-text-container {
+        &-answer-inner-container {
             width: 100%;
         }
         &-accepted-badge {
