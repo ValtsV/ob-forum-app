@@ -14,7 +14,7 @@
     Fijado por mods
   </div>
 </div>
-<div class="answer__div-answer-text-container">
+<div class="answer__div-answer-section">
   <div *ngIf="answer.pinned" class="answer__div-accepted-badge">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path
@@ -28,8 +28,9 @@
     *ngIf="!answer.pinned"
     [ngStyle]="{ width: '40px', 'flex-shrink': 0 }"
   ></div>
-  <div>
-    {{ answer.answer }}
+  <div class="answer__div-answer-text-container">
+    <div [innerHtml]="answer.answer"></div>
+
     <div class="answer__div-options">
       <div class="answer__div-vote-options">
         <button

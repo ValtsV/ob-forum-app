@@ -13,6 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { thumbsUp } from 'src/assets/svg/icons';
 import { StorageService } from 'src/app/service/storage.service';
 import { User } from 'src/app/User';
+import { AnswerRequest } from 'src/app/AnswerRequest';
 
 @Component({
   selector: 'app-question',
@@ -31,6 +32,11 @@ export class QuestionComponent implements OnInit {
   currentUser: User = {} as User
 
   thumbsUp: any = "assets/thumbs-up.svg"
+
+  newAnswer: AnswerRequest = {
+    answer: '',
+    preguntaId: undefined
+  }
 
 
   constructor(
@@ -91,9 +97,19 @@ export class QuestionComponent implements OnInit {
   }
 
   saveAnswer(answerHtml: string) {
-    const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
-    this.answerService.saveAnswer(answerHtml, questionId).subscribe(data => console.log(data))
+    this.newAnswer = {
+      answer: answerHtml,
+      preguntaId: Number(this.route.snapshot.paramMap.get('questionId'))
+    }
+    }
+
+  onAnswerSubmit() {
+    this.answerService.saveAnswer(this.newAnswer).subscribe((data: Answer[]) => {
+      this.answers = data
+    })  
   }
+
+
 
   orderByDate() {
     this.answers = this.answers.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))

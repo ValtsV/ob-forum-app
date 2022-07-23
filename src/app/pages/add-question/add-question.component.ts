@@ -50,8 +50,6 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onSubmit() {
-    // const themeId = Number(this.route.snapshot.paramMap.get('themeId'))
-    // this.questionService.saveQuestion({...this.newQuestion, temaId: themeId}).subscribe(data => console.log(data))  }
     this.questionService.saveQuestion(this.newQuestion).subscribe((data: Question) => {
       this.router.navigate(['temas', this.newQuestion.temaId, 'preguntas', data.id])
     })  

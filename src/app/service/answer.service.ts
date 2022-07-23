@@ -15,12 +15,8 @@ export class AnswerService {
     return this.http.get<Answer[]>('http://localhost:3333/foro/respuestas/preguntas/' + questionId)
   }
 
-  saveAnswer(answerText: string, answerId: number): Observable<any> {
-    const answerRequest: AnswerRequest = {
-      answer: answerText,
-      preguntaId: answerId
-    }
-    return this.http.post('http://localhost:3333/foro/respuestas', answerRequest)
+  saveAnswer(answer: AnswerRequest): Observable<any> {
+    return this.http.post('http://localhost:3333/foro/respuestas', answer)
   }
 
   updateAnswer(answer: Answer): Observable<Answer> {

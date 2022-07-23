@@ -19,7 +19,7 @@ export class AnswerComponent implements OnInit {
   @Output() voteEvent = new EventEmitter<{vote: boolean, id: number}>()
   @Output() pinEvent = new EventEmitter<Answer>()
 
-  constructor(private fileService: FileUploadService, protected sanitizer: DomSanitizer) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.timeSincePublished = moment(this.answer.updatedAt).fromNow()

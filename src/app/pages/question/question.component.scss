@@ -83,14 +83,7 @@
                 flex-shrink: 0;
             }
         }
-        &-fake-input {
-            color: variables.$grey-4;
-            padding: 9px;
-            background-color: variables.$grey-1;
-            border: 1px solid variables.$grey-3;
-            border-radius: 12px;
-            width: 100%;
-        }
+        
     }
     &__btn {
         &-positive-vote {
@@ -108,6 +101,7 @@
                     fill: variables.$white;
                 }
             }
+            
         }
         &-negative-vote {
             border-color: variables.$cancel;
@@ -126,6 +120,15 @@
             border-color: variables.$grey-4;
             background-color: transparent;
             border-radius: 10px;
+        }
+        &-fake-input {
+            color: variables.$grey-4;
+            padding: 9px;
+            background-color: variables.$grey-1;
+            border: 1px solid variables.$grey-3;
+            border-radius: 12px;
+            width: 100%;
+            text-align: start;
         }
     }
 }

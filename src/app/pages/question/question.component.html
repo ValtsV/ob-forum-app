@@ -100,18 +100,21 @@
     (voteEvent)="voteForAnswer($event)"
     (pinEvent)="pinAnswer($event)"
   ></app-answer>
-  <div class="question__div-write-answer-container" id="respond">
-    <img [src]="img" />
-    <div
-      *ngIf="!writingModeOn"
-      (click)="toggleWritingMode()"
-      class="question__div-fake-input p-text"
-    >
-      Escribe una respuesta
+  <form #newAnswerForm="ngForm" (ngSubmit)="onAnswerSubmit()">
+    <div class="question__div-write-answer-container" id="respond">
+      <img [src]="img" />
+      <!-- TODO: change to button -->
+      <button
+        *ngIf="!writingModeOn"
+        (click)="toggleWritingMode()"
+        class="question__btn-fake-input p-text"
+      >
+        Escribe una respuesta
+      </button>
+      <app-tiptap
+        *ngIf="writingModeOn"
+        (emitHtml)="saveAnswer($event)"
+      ></app-tiptap>
     </div>
-    <app-tiptap
-      *ngIf="writingModeOn"
-      (emitHtml)="saveAnswer($event)"
-    ></app-tiptap>
-  </div>
+  </form>
 </div>
