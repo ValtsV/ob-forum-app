@@ -9,6 +9,15 @@
 }
 
 .sidemenu {
+    &__a {
+        &-link-ob {
+            display: flex;
+            align-items: center;
+            svg {
+                margin: 0 10px;
+            }
+        }
+    }
     &__hr {
         margin: 0;
         color: variables.$grey-3;

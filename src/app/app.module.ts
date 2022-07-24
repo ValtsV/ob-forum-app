@@ -26,6 +26,7 @@ import { TiptapComponent } from './components/tiptap/tiptap.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { BtnComponent } from './components/btn/btn.component';
 import { InnerHtmlComponent } from './components/inner-html/inner-html.component';
+import { FilterNumbersPipe } from './pipes/filter-numbers.pipe';
  
 
 
@@ -49,7 +50,8 @@ import { InnerHtmlComponent } from './components/inner-html/inner-html.component
     TiptapComponent,
     ImageUploadComponent,
     BtnComponent,
-    InnerHtmlComponent
+    InnerHtmlComponent,
+    FilterNumbersPipe
         ],
   imports: [
     BrowserModule,
@@ -64,8 +66,6 @@ import { InnerHtmlComponent } from './components/inner-html/inner-html.component
     useClass: HttpRequestInterceptor,
     multi: true
   }],
-    // providers: [CourseService],
-
   bootstrap: [AppComponent]
 })
 export class AppModule { }

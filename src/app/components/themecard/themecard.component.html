@@ -1,6 +1,62 @@
 <a routerLink="./{{ theme.id }}" class="themecard__a">
-  <div class="themecard__div-upper-container">
-    <div class="themecard__icon-container">Circle</div>
+  <div
+    class="themecard__div-upper-container"
+    [ngStyle]="themeColor != undefined ? { background: themeColor } : null"
+  >
+    <div
+      class="themecard__icon-container"
+      [ngStyle]="iconBgColor != undefined ? { background: iconBgColor } : null"
+      [ngSwitch]="theme.title"
+    >
+      <svg
+        *ngSwitchCase="'General'"
+        width="25"
+        height="24"
+        viewBox="0 0 25 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M21.8335 0.333984H3.16683C1.88 0.333984 0.833496 1.38048 0.833496 2.66732V16.6673C0.833496 17.9542 1.88 19.0007 3.16683 19.0007H6.66683V23.3955L13.99 19.0007H21.8335C23.1203 19.0007 24.1668 17.9542 24.1668 16.6673V2.66732C24.1668 1.38048 23.1203 0.333984 21.8335 0.333984ZM21.8335 16.6673H13.3437L9.00016 19.2725V16.6673H3.16683V2.66732H21.8335V16.6673Z"
+          fill="white"
+        />
+        <path
+          d="M6.66683 6.16732H18.3335V8.50065H6.66683V6.16732ZM6.66683 10.834H14.8335V13.1673H6.66683V10.834Z"
+          fill="white"
+        />
+      </svg>
+      <svg
+        *ngSwitchCase="'Errores'"
+        width="22"
+        height="22"
+        viewBox="0 0 22 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.73457 8.66618H12.0679V14.4995H9.73457V8.66618ZM9.7334 15.6662H12.0667V17.9995H9.7334V15.6662Z"
+          fill="white"
+        />
+        <path
+          d="M12.9626 1.89916C12.5566 1.13499 11.7656 0.660156 10.9 0.660156C10.0343 0.660156 9.2433 1.13499 8.8373 1.90032L0.276302 18.0738C-0.109865 18.8042 -0.0865316 19.6617 0.339302 20.3698C0.765135 21.0768 1.5118 21.4992 2.3378 21.4992H19.4621C20.2881 21.4992 21.036 21.0768 21.4618 20.3698C21.8865 19.6628 21.911 18.8042 21.5248 18.0738L12.9626 1.89916ZM2.3378 19.1658L10.9 2.99232L19.468 19.1658H2.3378Z"
+          fill="white"
+        />
+      </svg>
+      <svg
+        *ngSwitchCase="'Proyectos'"
+        width="20"
+        height="19"
+        viewBox="0 0 20 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.20113 5.3397L10.2675 9.8512L13.3953 8.11287L5.4223 3.55704L2.20113 5.3397ZM17.3001 8.6297V12.3339L14.9668 13.5005V9.9352L11.4691 11.8929L11.4668 18.5184L19.6335 13.98V7.3242L17.3001 8.6297ZM9.13346 11.8917L0.966797 7.32304V13.98L9.13346 18.5184V11.8917ZM15.78 6.7887L18.398 5.33387L10.3235 0.845703L7.81163 2.2352L15.78 6.7887Z"
+          fill="white"
+        />
+      </svg>
+      <div *ngSwitchDefault>{{ theme.title | filterNumbers }}</div>
+    </div>
     <h2 class="card-category">{{ theme.title }}</h2>
   </div>
   <div class="themecard__div-lower-container">

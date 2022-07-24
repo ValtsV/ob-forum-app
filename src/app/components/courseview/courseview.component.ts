@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/app/service/theme.service';
 import { CourseService } from 'src/app/service/course.service';
 import {Theme} from '../../Theme';
+import { ColorsService } from 'src/app/service/colors.service';
 
 @Component({
   selector: 'app-courseview',
@@ -13,8 +14,12 @@ export class CourseviewComponent implements OnInit {
   courseId!: number
   courseImg!: any
   themes: Theme[] = []
+  courseColor: string = ''
  
-  constructor(private themeService: ThemeService, private courseService: CourseService) { 
+  constructor(
+    private themeService: ThemeService, 
+    private courseService: CourseService,
+    private colorService: ColorsService) { 
   }
 
   ngOnInit(): void {
@@ -24,6 +29,8 @@ export class CourseviewComponent implements OnInit {
       this.courseImg = course.avatar
       
       this.themeService.getThemes(this.courseId).subscribe((themes) => this.themes = themes);
+
+      this.courseColor = this.colorService.getHex(this.title)
     })
 
   }
