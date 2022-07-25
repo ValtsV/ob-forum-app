@@ -1,0 +1,23 @@
+@use 'src/styles/abstracts/variables';
+
+.follow-button {
+    &__btn {
+        &-container {
+            padding: 10px 16px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            border: 1px solid variables.$grey-4;
+            &-following {
+                color: variables.$primary-color;
+                border: none;
+                 path {
+                    fill: variables.$primary-color;
+                }
+                
+            }
+        }
+    }
+}

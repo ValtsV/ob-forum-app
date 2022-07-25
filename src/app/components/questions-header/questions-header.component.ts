@@ -18,6 +18,7 @@ export class QuestionsHeaderComponent implements OnInit {
   theme: Theme = {} as Theme
   themeId!: number
   currentUser: User = {} as User
+  isFollowing: boolean = false
 
 
   constructor(
@@ -32,15 +33,34 @@ export class QuestionsHeaderComponent implements OnInit {
       this.theme = theme
       this.courseService.getCourseById(this.theme.cursoId).subscribe(course => {
         this.course = course
-        this.courseImg = course.avatar
-           
+        this.courseImg = course.avatar   
       })
+      this.themeService.checkFollowStatus(this.themeId).subscribe({
+        next: (isFollowing: boolean) => this.isFollowing = isFollowing,
+        error: (error: any) => console.log(error)
+      })
+
     })
     this.storageService.currentUser.subscribe(user => this.currentUser = user)
   }
 
-  onEmitCurrentId(id: number) {
-    // TODO: implement theme pinning
-    console.log("TODO: implement theme pinning")
+  onEmitCurrentId() {
+    const themeRequest = {...this.theme, pinned: !this.theme.pinned}
+   this.themeService.updateTheme(themeRequest).subscribe({
+    next: (theme: Theme) => this.theme.pinned = theme.pinned,
+    error: (error: any) => console.log(error)
+   })
+  }
+
+  toggleFollow() {
+    this.isFollowing ?
+    this.themeService.deleteFollower(this.themeId).subscribe({
+      next: (res: Response) => this.isFollowing = false,
+      error: (error: any) => console.log(error)
+    })     : 
+      this.themeService.followTheme(this.themeId).subscribe({
+        next: (res: Response) => this.isFollowing = true,
+        error: (error: any) => console.log(error)
+      })
   }
 }

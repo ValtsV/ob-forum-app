@@ -1,0 +1,24 @@
+<button
+  class="follow-button__btn-container md-btn-text"
+  [ngClass]="isFollowing ? 'follow-button__btn-container-following' : 'ghost'"
+  [ngStyle]="
+    isFollowing ? { 'background-color': 'rgba(50, 213, 164, 0.1)' } : null
+  "
+>
+  <svg width="20" height="15" viewBox="0 0 20 15" fill="none">
+    <path
+      d="M17 4L15 4L15 7L12 7L12 9L15 9L15 12L17 12L17 9L20 9L20 7L17 7L17 4ZM2 4C2 6.28 3.72 8 6 8C8.28 8 10 6.28 10 4C10 1.72 8.28 4.26367e-09 6 3.08962e-09C3.72 1.91556e-09 2 1.72 2 4ZM8 4C8 5.178 7.178 6 6 6C4.822 6 4 5.178 4 4C4 2.822 4.822 2 6 2C7.178 2 8 2.822 8 4ZM2 14C2 12.346 3.346 11 5 11L7 11C8.654 11 10 12.346 10 14L10 15L12 15L12 14C12 11.243 9.757 9 7 9L5 9C2.243 9 5.38181e-09 11.243 6.70153e-09 14L7.18021e-09 15L2 15L2 14Z"
+      fill="#121625"
+    />
+  </svg>
+
+  <ng-template #notFollowed>
+    <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+      <path
+        d="M18.294 4.792L13.994 9.084L12.702 7.792L11.288 9.206L13.994 11.91L19.706 6.208L18.294 4.792ZM2 4.5C2 6.78 3.72 8.5 6 8.5C8.28 8.5 10 6.78 10 4.5C10 2.22 8.28 0.5 6 0.5C3.72 0.5 2 2.22 2 4.5ZM8 4.5C8 5.678 7.178 6.5 6 6.5C4.822 6.5 4 5.678 4 4.5C4 3.322 4.822 2.5 6 2.5C7.178 2.5 8 3.322 8 4.5ZM2 14.5C2 12.846 3.346 11.5 5 11.5L7 11.5C8.654 11.5 10 12.846 10 14.5L10 15.5L12 15.5L12 14.5C12 11.743 9.757 9.5 7 9.5L5 9.5C2.243 9.5 5.38181e-09 11.743 6.70153e-09 14.5L7.18021e-09 15.5L2 15.5L2 14.5Z"
+        fill="#32D5A4"
+      />
+    </svg>
+  </ng-template>
+  {{ isFollowing ? "Siguiendo" : "Seguir" + " " + (type! | translate) }}
+</button>

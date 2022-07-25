@@ -9,8 +9,6 @@ import { ThemeService } from 'src/app/service/theme.service';
 import { Theme } from 'src/app/Theme';
 import { AnswerService } from 'src/app/service/answer.service';
 import * as moment from 'moment';
-import { DomSanitizer } from '@angular/platform-browser';
-import { thumbsUp } from 'src/assets/svg/icons';
 import { StorageService } from 'src/app/service/storage.service';
 import { User } from 'src/app/User';
 import { AnswerRequest } from 'src/app/AnswerRequest';
@@ -30,6 +28,7 @@ export class QuestionComponent implements OnInit {
   writingModeOn: boolean = false
   img!: any
   currentUser: User = {} as User
+  isFollowing: boolean = false
 
   thumbsUp: any = "assets/thumbs-up.svg"
 
@@ -45,7 +44,6 @@ export class QuestionComponent implements OnInit {
     private themeService: ThemeService, 
     private courseService: CourseService, 
     private storageService: StorageService,
-    protected sanitizer: DomSanitizer, 
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -60,6 +58,10 @@ export class QuestionComponent implements OnInit {
     })
     this.questionService.getQuestionById(questionId).subscribe((question: any) => {
       this.question = question
+      this.questionService.checkFollowStatus(question.id).subscribe({
+        next: (isFollowing: boolean) => this.isFollowing = isFollowing,
+        error: (error: any) => console.log(error)
+      })
       this.timeSincePublished = moment(question.updatedAt).fromNow()
     })
     this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => {
@@ -133,5 +135,17 @@ export class QuestionComponent implements OnInit {
     this.answerService.updateAnswer({...answer, pinned: !answer.pinned}).subscribe((res: any) => {
       this.answers = res
     })
+  }
+
+  toggleFollow() {
+    this.isFollowing ?
+    this.questionService.deleteFollower(this.question.id!).subscribe({
+      next: (res: Response) => this.isFollowing = false,
+      error: (error: any) => console.log(error)
+    })     : 
+      this.questionService.followQuestion(this.question.id!).subscribe({
+        next: (res: Response) => this.isFollowing = true,
+        error: (error: any) => console.log(error)
+      })
   }
 }

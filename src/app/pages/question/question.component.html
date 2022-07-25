@@ -8,7 +8,12 @@
         {{ timeSincePublished }}</span
       >
     </div>
-    <button>ICON Seguir pregunta</button>
+    <app-follow-button
+      [isFollowing]="isFollowing"
+      type="question"
+      (click)="toggleFollow()"
+    >
+    </app-follow-button>
   </div>
   <hr />
   <app-inner-html [html]="question.description"></app-inner-html>

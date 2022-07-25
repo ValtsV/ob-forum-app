@@ -19,4 +19,20 @@ export class ThemeService {
   getTheme(themeId: number): Observable<Theme> {
     return this.http.get<Theme>(this.url + themeId)
   }
+
+  updateTheme(theme: Theme): Observable<Theme> {
+    return this.http.put<Theme>(this.url, theme)
+  }
+
+  checkFollowStatus(themeId: number): Observable<boolean> {
+    return this.http.get<boolean>(this.url + themeId + "/followers")
+  }
+
+  followTheme(themeId: number) : Observable<Response> {
+    return this.http.post<Response>(this.url + themeId + "/followers", null)
+  }
+
+  deleteFollower(themeId: number) : Observable<Response> {
+    return this.http.delete<Response>(this.url + themeId + "/followers")
+  }
 }

@@ -8,7 +8,7 @@ import { QuestionRequest } from '../QuestionRequest';
   providedIn: 'root'
 })
 export class QuestionService {
-  url: string = 'http://localhost:3333/foro/votos/preguntas'
+  url: string = 'http://localhost:3333/foro/preguntas/'
 
 
   constructor(private http: HttpClient) { }
@@ -39,13 +39,6 @@ export class QuestionService {
   }
 
   vote(questionId: number, vote: boolean): Observable<any> {
-    const httpOptions = {
-      // headers: new HttpHeaders({ 'Content-Type': 'application/json', observe: 'response'})
-      headers: new HttpHeaders({ observe: 'response'})
-
-    };
-    // const headers: new HttpHeaders({ observe: 'response'})
-
     const data = {vote: vote}
     return this.http.post<any>('http://localhost:3333/foro/votos/preguntas/' + questionId, data)
     .pipe(map(res => res.map((votes: any) => votes.vote)))
@@ -61,5 +54,17 @@ export class QuestionService {
 
   updateQuestion(question: Question): Observable<Question> {
     return this.http.put<Question>('http://localhost:3333/foro/preguntas', question)
+  }
+
+  checkFollowStatus(questionId: number): Observable<boolean> {
+    return this.http.get<boolean>(this.url + questionId + "/followers")
+  }
+
+  followQuestion(questionId: number) : Observable<Response> {
+    return this.http.post<Response>(this.url + questionId + "/followers", null)
+  }
+
+  deleteFollower(questionId: number) : Observable<Response> {
+    return this.http.delete<Response>(this.url + questionId + "/followers")
   }
  }

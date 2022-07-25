@@ -28,6 +28,8 @@ import { BtnComponent } from './components/btn/btn.component';
 import { InnerHtmlComponent } from './components/inner-html/inner-html.component';
 import { FilterNumbersPipe } from './pipes/filter-numbers.pipe';
 import { PinButtonComponent } from './components/buttons/pin-button/pin-button.component';
+import { FollowButtonComponent } from './components/buttons/follow-button/follow-button.component';
+import { TranslatePipe } from './pipes/translate.pipe';
  
 
 
@@ -53,7 +55,9 @@ import { PinButtonComponent } from './components/buttons/pin-button/pin-button.c
     BtnComponent,
     InnerHtmlComponent,
     FilterNumbersPipe,
-    PinButtonComponent
+    PinButtonComponent,
+    FollowButtonComponent,
+    TranslatePipe
         ],
   imports: [
     BrowserModule,
