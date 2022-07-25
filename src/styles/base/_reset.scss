@@ -1,3 +1,5 @@
+@use '../styles/abstracts/variables';
+
 body {
     padding: 0;
     margin: 0;
@@ -5,6 +7,7 @@ body {
     button {
         padding: 0;
         border: 0;
+        cursor: pointer;
     }
     a {
         color: inherit; 
@@ -13,3 +16,6 @@ body {
     
       
 }
+// ::placeholder {
+//     color: variables.$grey-6;
+// }

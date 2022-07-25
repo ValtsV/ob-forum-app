@@ -15,6 +15,7 @@ export class CourseviewComponent implements OnInit {
   courseImg!: any
   themes: Theme[] = []
   courseColor: string = ''
+  showThemeOrderOptions: boolean = false
  
   constructor(
     private themeService: ThemeService, 

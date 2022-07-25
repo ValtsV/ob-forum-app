@@ -25,20 +25,27 @@
     }
 
     &__btn {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: none;
-        h5 {
+        &-courses-menu {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: none; 
+            h5 {
             margin: 0;
         }
+        }
+        
+        
     }
 
     &__div {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        font-family: 'Raleway', sans-serif;
+        &-courses-menu {
+           display: flex;
+            flex-direction: column;
+            gap: 2px;
+            font-family: 'Raleway', sans-serif; 
+        }
+        
     }
 
 

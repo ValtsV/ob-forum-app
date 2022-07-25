@@ -55,7 +55,9 @@
           fill="white"
         />
       </svg>
-      <div *ngSwitchDefault>{{ theme.title | filterNumbers }}</div>
+      <div class="theme-icon themecard__div-icon" *ngSwitchDefault>
+        {{ theme.title | filterNumbers }}
+      </div>
     </div>
     <h2 class="card-category">{{ theme.title }}</h2>
   </div>

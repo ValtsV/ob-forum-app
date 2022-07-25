@@ -1,12 +1,12 @@
 <div
-  class="app-courseview__div-angular-color"
+  class="courseview__div-angular-color"
   [ngStyle]="{
     background: courseColor
   }"
 >
-  <div class="app-courseview__div-content-wrapper">
-    <div class="app-courseview__div-upper-content">
-      <div class="app-courseview__div-img-wrapper">
+  <div class="courseview__div-content-wrapper">
+    <div class="courseview__div-upper-content">
+      <div class="courseview__div-img-wrapper">
         <img [src]="courseImg" />
       </div>
       <h2>{{ title }}</h2>
@@ -14,13 +14,39 @@
     </div>
 
     <hr />
-    <div class="app-courseview__div-lower-content">
-      <span>INPUT</span>
+    <div class="courseview__div-lower-content">
+      <label class="courseview__label-search-input">
+        <span class="courseview__span-svg-container inset-y-0 left-2 pl-2">
+          <svg
+            class="fill-slate-300"
+            width="20"
+            height="20"
+            viewBox="0 0 19 19"
+          >
+            <path
+              d="M8 16C9.846 16 11.543 15.365 12.897 14.312L17.293 18.708L18.707 17.294L14.311 12.898C15.365 11.543 16 9.846 16 8C16 3.589 12.411 2.57666e-08 8 1.66089e-08C3.589 7.45115e-09 1.03521e-08 3.589 2.30753e-08 8C3.57984e-08 12.411 3.589 16 8 16ZM8 2C11.309 2 14 4.691 14 8C14 11.309 11.309 14 8 14C4.691 14 2 11.309 2 8C2 4.691 4.691 2 8 2Z"
+              fill="#A5A8B3"
+            />
+          </svg>
+        </span>
+        <input
+          type="text"
+          placeholder="Buscar temas (no funciona)"
+          class="courseview__input-search-input input-text"
+        />
+      </label>
       <!-- button title changes depending on chosen option  -->
-      <button>Ordenar por</button>
-      <div>
-        <button (click)="orderByPinned()">Fijados</button>
-        <button (click)="orderByQuestionCount()">Más preguntas</button>
+      <div class="courseview__div-dropdown">
+        <button (click)="showThemeOrderOptions = !showThemeOrderOptions">
+          Ordenar por
+        </button>
+        <div
+          *ngIf="showThemeOrderOptions"
+          class="courseview__div-theme-options-dropdown-content"
+        >
+          <button (click)="orderByPinned()">Fijados</button>
+          <button (click)="orderByQuestionCount()">Más preguntas</button>
+        </div>
       </div>
     </div>
   </div>

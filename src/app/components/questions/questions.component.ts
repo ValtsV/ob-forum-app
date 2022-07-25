@@ -11,6 +11,7 @@ import { QuestionService } from 'src/app/service/question.service';
 export class QuestionsComponent implements OnInit {
   questions: Question[] = []
   pinnedQuestions: Question[] = []
+  status: boolean = true
 
   constructor(private questionService: QuestionService, private route: ActivatedRoute) { }
 
@@ -31,9 +32,11 @@ export class QuestionsComponent implements OnInit {
       }
       return 0
     })
+    this.status = true
   }
 
   orderByDate() {
     this.questions = this.questions.sort((a,b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    this.status = false
   }
 } 

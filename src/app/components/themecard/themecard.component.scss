@@ -51,6 +51,9 @@
                 color: variables.$grey-6;
             }
         }
+        &-icon {
+            color: variables.$primary-color-neon;
+        }
     }
     &__title {
         flex-grow: 1;
@@ -73,4 +76,5 @@
         justify-content: center;
         align-items: center;
     }
+    
 }

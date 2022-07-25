@@ -9,10 +9,15 @@
 
 <div class="questions__div-questions">
   <div class="questions__div-orderby-options">
-    <button (click)="orderByPositiveVotes()" class="active">
+    <button
+      (click)="orderByPositiveVotes()"
+      [ngClass]="status ? 'active' : 'ghost'"
+    >
       <h2>En tendencia</h2>
     </button>
-    <button (click)="orderByDate()"><h2>Más recientes</h2></button>
+    <button (click)="orderByDate()" [ngClass]="!status ? 'active' : 'ghost'">
+      <h2>Más recientes</h2>
+    </button>
   </div>
   <app-question-card
     *ngFor="let question of questions"

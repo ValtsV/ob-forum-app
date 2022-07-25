@@ -12,6 +12,7 @@ import { FileUploadService } from 'src/app/service/file-upload.service';
 export class SidemenuComponent implements OnInit {
   courses: Course[] = [];
   selectedCourse: Course = {} as Course
+  showCourses: boolean = true
 
   constructor(private courseService: CourseService, private fileService: FileUploadService, protected sanitizer: DomSanitizer) {   }
 
@@ -28,7 +29,9 @@ export class SidemenuComponent implements OnInit {
   selectCourse = (course: Course) => {
     this.courseService.setSelectedCourse(course)}
 
-  
+  toggleCoursesMenu() {
+    this.showCourses = !this.showCourses
+  }  
 }
 
 

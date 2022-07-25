@@ -66,6 +66,13 @@
                 padding: 9px 16px;
             }
         }
+        &-pinned-by-badge {
+            display: flex;
+            gap: 5px;
+            h3 {
+                color: variables.$grey-5;
+            }
+        }
     }
     &__img {
         &-answer-author-profile-img {

@@ -24,16 +24,30 @@
   Página principal</a
 >
 <hr class="sidemenu__hr" />
-<button class="sidemenu__btn">
+<button (click)="toggleCoursesMenu()" class="sidemenu__btn-courses-menu">
   <h5>Cursos</h5>
-  <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+  <svg
+    *ngIf="showCourses; else noShowCourses"
+    width="12"
+    height="8"
+    viewBox="0 0 12 8"
+    fill="none"
+  >
     <path
       d="M1.70703 7.20703L6.00003 2.91403L10.293 7.20703L11.707 5.79303L6.00003 0.0860314L0.293031 5.79303L1.70703 7.20703Z"
       fill="#A5A8B3"
     />
   </svg>
+  <ng-template #noShowCourses>
+    <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+      <path
+        d="M1.41406 8.74228e-07L5.70706 4.293L10.0001 1.23616e-07L11.4141 1.414L5.70706 7.121L6.21124e-05 1.414L1.41406 8.74228e-07Z"
+        fill="#A5A8B3"
+      />
+    </svg>
+  </ng-template>
 </button>
-<div class="sidemenu__div">
+<div *ngIf="showCourses" class="sidemenu__div-courses-menu">
   <app-button
     *ngFor="let course of courses"
     [icon]="course.avatar"

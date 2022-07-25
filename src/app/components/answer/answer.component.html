@@ -9,9 +9,14 @@
     </h4>
     <span class="card-details">Publicado hace {{ timeSincePublished }}</span>
   </div>
-  <div *ngIf="answer.pinned">
-    <span>icon</span>
-    Fijado por mods
+  <div *ngIf="answer.pinned" class="answer__div-pinned-by-badge">
+    <svg width="10" height="18" viewBox="0 0 10 18" fill="none">
+      <path
+        d="M7.5 8.65435V3.99935H9.16667V2.33268C9.16667 1.41268 8.42 0.666016 7.5 0.666016L2.5 0.666016C1.58 0.666016 0.833333 1.41268 0.833333 2.33268L0.833333 3.99935H2.5V8.65435L0.244167 10.0768C0.0875002 10.2327 0 10.4443 0 10.666L0 12.3327C0 12.7935 0.373333 13.166 0.833333 13.166H4.16667V15.666L5 17.3327L5.83333 15.666V13.166H9.16667C9.6275 13.166 10 12.7935 10 12.3327V10.666C10 10.4443 9.9125 10.2327 9.75583 10.0768L7.5 8.65435Z"
+        fill="#32D5A4"
+      />
+    </svg>
+    <h3 class="uppertitle">FIJADO POR MODS</h3>
   </div>
 </div>
 <div class="answer__div-answer-section">
