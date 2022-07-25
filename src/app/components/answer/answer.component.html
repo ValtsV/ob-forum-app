@@ -68,7 +68,13 @@
         </button>
       </div>
 
-      <button *ngIf="canPin" (click)="pinAnswer()">Pin it</button>
+      <app-pin-button
+        *ngIf="canPin"
+        [pinned]="answer.pinned"
+        type="answer"
+        [id]="answer.id"
+        (currentId)="pinAnswer()"
+      ></app-pin-button>
     </div>
   </div>
 </div>

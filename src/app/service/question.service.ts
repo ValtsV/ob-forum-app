@@ -60,7 +60,6 @@ export class QuestionService {
   }
 
   updateQuestion(question: Question): Observable<Question> {
-    console.log(question)
     return this.http.put<Question>('http://localhost:3333/foro/preguntas', question)
   }
  }

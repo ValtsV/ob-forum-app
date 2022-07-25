@@ -23,5 +23,11 @@
 <div>
   <button>Seguir</button>
   <a routerLink="./pregunta-nueva">Añadir pregunta</a>
-  <button *ngIf="currentUser.roles.includes('ADMIN')">Pin it</button>
+  <app-pin-button
+    *ngIf="currentUser.roles.includes('ADMIN')"
+    [pinned]="theme.pinned"
+    type="theme"
+    [id]="theme.id"
+    (currentId)="onEmitCurrentId($event)"
+  ></app-pin-button>
 </div>

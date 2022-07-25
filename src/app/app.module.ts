@@ -27,6 +27,7 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { BtnComponent } from './components/btn/btn.component';
 import { InnerHtmlComponent } from './components/inner-html/inner-html.component';
 import { FilterNumbersPipe } from './pipes/filter-numbers.pipe';
+import { PinButtonComponent } from './components/buttons/pin-button/pin-button.component';
  
 
 
@@ -51,7 +52,8 @@ import { FilterNumbersPipe } from './pipes/filter-numbers.pipe';
     ImageUploadComponent,
     BtnComponent,
     InnerHtmlComponent,
-    FilterNumbersPipe
+    FilterNumbersPipe,
+    PinButtonComponent
         ],
   imports: [
     BrowserModule,

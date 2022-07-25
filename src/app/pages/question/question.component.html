@@ -66,9 +66,13 @@
         Responder
       </button>
     </div>
-    <button *ngIf="currentUser.roles.includes('ADMIN')" (click)="pinQuestion()">
-      Pin this
-    </button>
+    <app-pin-button
+      *ngIf="currentUser.roles.includes('ADMIN')"
+      [pinned]="question.pinned"
+      type="question"
+      [id]="question.id"
+      (currentId)="pinQuestion()"
+    ></app-pin-button>
   </div>
 </div>
 <div class="question__div-answers-options">
