@@ -9,8 +9,13 @@
       <div class="courseview__div-img-wrapper">
         <img [src]="courseImg" />
       </div>
-      <h2>{{ title }}</h2>
-      <button>Siguiendo</button>
+      <h1>{{ title }}</h1>
+      <app-follow-button
+        [isFollowing]="isFollowing"
+        type="course"
+        (click)="toggleFollow()"
+      >
+      </app-follow-button>
     </div>
 
     <hr />

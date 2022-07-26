@@ -148,4 +148,8 @@ export class QuestionComponent implements OnInit {
         error: (error: any) => console.log(error)
       })
   }
+
+  closeTiptap(value: boolean) {
+    this.writingModeOn = value
+  }
 }

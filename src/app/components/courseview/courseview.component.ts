@@ -16,6 +16,7 @@ export class CourseviewComponent implements OnInit {
   themes: Theme[] = []
   courseColor: string = ''
   showThemeOrderOptions: boolean = false
+  isFollowing: boolean = false
  
   constructor(
     private themeService: ThemeService, 
@@ -28,6 +29,10 @@ export class CourseviewComponent implements OnInit {
       this.title = course.name
       this.courseId = course.id
       this.courseImg = course.avatar
+      this.courseService.checkFollowStatus(course.id).subscribe({
+        next: (isFollowing: boolean) => this.isFollowing = isFollowing,
+        error: (error: any) => console.log(error)
+      })
       
       this.themeService.getThemes(this.courseId).subscribe((themes) => this.themes = themes);
 
@@ -54,6 +59,18 @@ export class CourseviewComponent implements OnInit {
       }
       return 0
     })
+  }
+
+  toggleFollow() {
+    this.isFollowing ?
+    this.courseService.deleteFollower(this.courseId).subscribe({
+      next: (res: Response) => this.isFollowing = false,
+      error: (error: any) => console.log(error)
+    })     : 
+      this.courseService.followCourse(this.courseId).subscribe({
+        next: (res: Response) => this.isFollowing = true,
+        error: (error: any) => console.log(error)
+      })
   }
 
 }

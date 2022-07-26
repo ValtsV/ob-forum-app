@@ -38,4 +38,16 @@ export class CourseService {
   setSelectedCourse(course: Course): void {
     this.selectedCourse$.next(course)
   }
+
+  checkFollowStatus(courseId: number): Observable<boolean> {
+    return this.http.get<boolean>(this.url + '/' + courseId + "/followers")
+  }
+
+  followCourse(courseId: number) : Observable<Response> {
+    return this.http.post<Response>(this.url + '/' + courseId + "/followers", null)
+  }
+
+  deleteFollower(courseId: number) : Observable<Response> {
+    return this.http.delete<Response>(this.url + '/' + courseId + "/followers")
+  }
 }

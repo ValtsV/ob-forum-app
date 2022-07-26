@@ -3,7 +3,7 @@
 .follow-button {
     &__btn {
         &-container {
-            padding: 10px 16px;
+            padding: 9px 16px;
             border-radius: 10px;
             display: inline-flex;
             align-items: center;
@@ -11,8 +11,9 @@
             background-color: transparent;
             border: 1px solid variables.$grey-4;
             &-following {
+                padding: 10px 16px;
                 color: variables.$primary-color;
-                border: none;
+                border-color: variables.$white;
                  path {
                     fill: variables.$primary-color;
                 }

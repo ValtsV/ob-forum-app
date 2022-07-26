@@ -1,20 +1,25 @@
-@use '../../../styles/abstracts/variables';
+@use 'src/styles/abstracts/variables';
 
 :host {
-    border: 1px solid variables.$grey-3;
-    border-radius: 15px;
+    
     width: 100%;
     ::ng-deep tiptap-editor .ProseMirror {
         background-color: variables.$grey-1;
         padding: 10px;
         border: 1px solid variables.$grey-3;
         border-radius: 12px;
+        min-height: 200px;
     }
 }
 
 
 .tiptap {
     &__div {
+        &-outer-container {
+            border: 1px solid variables.$grey-3;
+            border-radius: 15px;
+            margin-bottom: 24px;
+        }
         &-container {
             background-color: variables.$grey-2;
             border-bottom: 1px solid variables.$grey-3;
@@ -27,9 +32,6 @@
             // align-items: center;
             :nth-child(1) {
                 flex-grow: 1;
-            }
-            button {
-                background-color: transparent;
             }
         }
         &-toggles {
@@ -53,10 +55,32 @@
                 border: 1px solid variables.$grey-3;
             }
         }
+        &-action-btn-container {
+            display: flex;
+            gap: 8px;
+        }
     }
     &__btn {
         &-options {
             margin-right: 22px;
+        }
+        &-cancel, &-write {
+            padding: 10px 16px;
+            background-color: variables.$white;
+            border: 1px solid variables.$grey-4;
+            border-radius: 10px;
+        }
+        &-submit {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            color: variables.$white;
+            background-color: variables.$primary-color;
+            border-radius: 10px;
+        }
+        &-transparent {
+            background-color: transparent;
         }
     }
 }

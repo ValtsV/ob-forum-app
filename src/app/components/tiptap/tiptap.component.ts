@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Editor } from '@tiptap/core';
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
+import { TranslatePipe } from 'src/app/pipes/translate.pipe';
 
 @Component({
   selector: 'app-tiptap',
@@ -31,16 +32,20 @@ export class TiptapComponent implements OnInit {
         class: 'prose'
     }}
   })
-  value: string = '<p>Hello, Tiptap!</p>'
+  @Input() type: string = ''
+  value: string = ''
   html: string = ''
   @Output() emitHtml = new EventEmitter<string>()
+  @Output() clearHtml = new EventEmitter<boolean>()
   isPreviewOn: boolean = false
+
   
   selectedText: string = this.editor.view.state.doc.textBetween(this.editor.view.state.selection.$from.pos, this.editor.view.state.selection.$to.pos, ' ')
 
-  constructor() { }
+  constructor(private translate: TranslatePipe) { }
 
   ngOnInit(): void {
+    this.value = '<p>Escribe tu ' + this.translate.transform(this.type) + '</p>'
   }
 
   toggleLink() {
@@ -80,10 +85,15 @@ export class TiptapComponent implements OnInit {
 
   emitTiptapHtml() {
     this.emitHtml.emit(this.editor.getHTML())
+    this.closeWritingMode()
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 
+  closeWritingMode() {
+    this.clearHtml.emit(false)
+    this.html = ''
+  }
 }

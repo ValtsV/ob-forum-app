@@ -26,6 +26,7 @@
         }
         &-title-container {
             display: flex;
+            align-items: flex-start;
             flex-direction: column;
             gap: 10px;
             h1 {
@@ -123,6 +124,14 @@
             border-radius: 12px;
             width: 100%;
             text-align: start;
+        }
+    }
+    &__a {
+        &-theme {
+            padding: 6px 12px;
+            color: variables.$primary-color-dark;
+            background-color: variables.$primary-color-light;
+            border-radius: 5px;
         }
     }
 }

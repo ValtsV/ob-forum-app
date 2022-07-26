@@ -1,12 +1,12 @@
-<div class="questions-header-left__flex-container">
-  <div class="questions-header-left__div">
+<div class="questions-header__flex-container">
+  <div class="questions-header__div">
     <img [src]="courseImg" />
-    <div class="questions-header-left__div-description">
+    <div class="questions-header__div-description">
       <h1>{{ course?.name }}</h1>
       <h3 class="description">{{ theme.description }}</h3>
     </div>
   </div>
-  <div class="questions-header-left__div-details">
+  <div class="questions-header__div-details">
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
       <path
         d="M3.1665 13.9993V17.1377L8.39734 13.9993H12.3332C13.2523 13.9993 13.9998 13.2518 13.9998 12.3327V5.66602C13.9998 4.74685 13.2523 3.99935 12.3332 3.99935H2.33317C1.414 3.99935 0.666504 4.74685 0.666504 5.66602L0.666504 12.3327C0.666504 13.2518 1.414 13.9993 2.33317 13.9993H3.1665ZM2.33317 5.66602H12.3332V12.3327H7.93567L4.83317 14.1943V12.3327H2.33317V5.66602Z"
@@ -20,14 +20,28 @@
     <span> {{ theme.preguntasCount }} preguntas </span>
   </div>
 </div>
-<div>
+<div class="questions-header__div-options">
   <app-follow-button
     [isFollowing]="isFollowing"
     type="theme"
     (click)="toggleFollow()"
   >
   </app-follow-button>
-  <a routerLink="./pregunta-nueva">Añadir pregunta</a>
+  <a
+    routerLink="./pregunta-nueva"
+    class="questions-header__a-add-question md-btn-text"
+    ><svg width="20" height="21" viewBox="0 0 20 21" fill="none">
+      <path
+        d="M18 0.5L2 0.5C0.897 0.5 4.29377e-10 1.397 9.57361e-10 2.5L6.70153e-09 14.5C7.22951e-09 15.603 0.897 16.5 2 16.5L5 16.5L5 20.267L11.277 16.5L18 16.5C19.103 16.5 20 15.603 20 14.5L20 2.5C20 1.397 19.103 0.5 18 0.5ZM18 14.5L10.723 14.5L7 16.733L7 14.5L2 14.5L2 2.5L18 2.5L18 14.5Z"
+        fill="white"
+      />
+      <path
+        d="M9 12.5L11 12.5L11 9.5L14 9.5L14 7.5L11 7.5L11 4.5L9 4.5L9 7.5L6 7.5L6 9.5L9 9.5L9 12.5Z"
+        fill="white"
+      />
+    </svg>
+    Añadir pregunta</a
+  >
   <app-pin-button
     *ngIf="currentUser.roles.includes('ADMIN')"
     [pinned]="theme.pinned"

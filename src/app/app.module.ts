@@ -9,7 +9,6 @@ import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { CourseviewComponent } from './components/courseview/courseview.component';
 import { ThemecardComponent } from './components/themecard/themecard.component';
 import { ButtonComponent } from './components/button/button.component';
-import { CourseService } from './service/course.service';
 import { TemasComponent } from './pages/temas/temas.component';
 import { DiscusionesComponent } from './pages/discusiones/discusiones.component';
 import { QuestionsComponent } from './components/questions/questions.component';
@@ -71,7 +70,9 @@ import { TranslatePipe } from './pipes/translate.pipe';
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
     multi: true
-  }],
+  },
+  TranslatePipe
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

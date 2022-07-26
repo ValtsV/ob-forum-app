@@ -8,7 +8,7 @@
     background-color: variables.$black-dark-mode;
 }
 
-.questions-header-left{
+.questions-header{
     &__flex-container {
         display: flex;
         flex-direction: column;
@@ -34,7 +34,23 @@
             svg {
                 color: variables.$grey-6;
             }
+        }
+        &-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     }
+    &__a {
+        &-add-question {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background-color: variables.$primary-color;
+            color: variables.$white;
+            border-radius: 10px;
+        }
     }
     
     

@@ -32,11 +32,12 @@
         &-upper-content {
             position: relative;
             display: flex;
+            align-items: flex-end;
             justify-content: space-between;
             img {
                 width: 100%;
             }
-            h2 {
+            h1 {
                 margin-left: 114px;
             }
         }

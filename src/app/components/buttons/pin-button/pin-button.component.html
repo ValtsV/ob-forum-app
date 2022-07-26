@@ -2,6 +2,7 @@
   (click)="emitId()"
   class="pin-button__btn-container"
   [ngStyle]="pinned ? { 'background-color': 'rgba(50, 213, 164, 0.1)' } : null"
+  [ngClass]="type === 'answer' ? 'pin-button__btn-small' : 'ghost'"
 >
   <svg
     *ngIf="pinned; else notPinned"

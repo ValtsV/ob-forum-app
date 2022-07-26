@@ -1,7 +1,9 @@
 <div class="question__div-question-container">
   <div class="question__div-question-header">
     <div class="question__div-title-container">
-      <a routerLink="../../">{{ course?.name }}/{{ theme.title }}</a>
+      <a routerLink="../../" class="question__a-theme sm-btn-text"
+        >{{ course?.name }}/{{ theme.title }}</a
+      >
       <h1>{{ question?.title }}</h1>
       <span class="votes-text"
         >Subido por <b>@{{ question?.user?.username }}</b> hace
@@ -114,6 +116,8 @@
       <app-tiptap
         *ngIf="writingModeOn"
         (emitHtml)="saveAnswer($event)"
+        [type]="'respuesta'"
+        (clearHtml)="closeTiptap($event)"
       ></app-tiptap>
     </div>
   </form>

@@ -12,6 +12,12 @@ export class TranslatePipe implements PipeTransform {
     if (value === 'question') {
       return 'pregunta'
     }
+    if (value === 'course') {
+      return 'curso'
+    }
+    if (value === 'answer') {
+      return 'respuesta'
+    }
     return value;
   }
 
