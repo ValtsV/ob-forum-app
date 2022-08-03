@@ -18,29 +18,20 @@ export class QuestionService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json', observe: 'response'})
 
     };
-    return this.http.get<Question[]>('http://localhost:3333/foro/preguntas/temas/' + themeId)
+    return this.http.get<Question[]>(this.url + 'temas/' + themeId)
   }
 
   getQuestionById(questionId: number): Observable<Question> {
-    return this.http.get<Question>('http://localhost:3333/foro/preguntas/' + questionId)
+    return this.http.get<Question>(this.url + questionId)
   }
 
-  // saveQuestion(questionHtml: string, themeId: number): Observable<any> {
-  //   const questionRequest: QuestionRequest = {
-  //     description: questionHtml,
-  //   title: "Pregunta title",
-  //   isPinned: false,
-  //   temaId: themeId
-  //   }
-  //   return this.http.post('http://localhost:3333/foro/preguntas', questionRequest)
-  // }
   saveQuestion(newQuestion: QuestionRequest): Observable<any> {
-    return this.http.post('http://localhost:3333/foro/preguntas', newQuestion)
+    return this.http.post(this.url, newQuestion)
   }
 
   vote(questionId: number, vote: boolean): Observable<any> {
     const data = {vote: vote}
-    return this.http.post<any>('http://localhost:3333/foro/votos/preguntas/' + questionId, data)
+    return this.http.post<any>(this.url + questionId, data)
     .pipe(map(res => res.map((votes: any) => votes.vote)))
     .pipe(map(res => {
       const totalPositiveVotes = res.filter(Boolean).length
@@ -53,7 +44,7 @@ export class QuestionService {
   }
 
   updateQuestion(question: Question): Observable<Question> {
-    return this.http.put<Question>('http://localhost:3333/foro/preguntas', question)
+    return this.http.put<Question>(this.url, question)
   }
 
   checkFollowStatus(questionId: number): Observable<boolean> {

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Course } from 'src/app/Course';
 import { Theme } from 'src/app/Theme';
 
 @Component({

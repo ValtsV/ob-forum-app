@@ -29,21 +29,29 @@ export class QuestionsHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.themeService.getTheme(this.themeId).subscribe(theme => {
-      this.theme = theme
-      this.courseService.getCourseById(this.theme.cursoId).subscribe(course => {
-        this.course = course
-        this.courseImg = course.avatar   
-      })
-      this.themeService.checkFollowStatus(this.themeId).subscribe({
-        next: (isFollowing: boolean) => this.isFollowing = isFollowing,
-        error: (error: any) => console.log(error)
-      })
-
+    this.themeService.getTheme(this.themeId).subscribe({
+      next: (theme: Theme) => {
+        this.theme = theme
+        this.courseService.getCourseById(this.theme.cursoId).subscribe({
+          next: (course: Course) => {
+            this.course = course
+            this.courseImg = course.avatar   
+          },
+          error: (error: any) => console.log(error)
+        })
+        this.themeService.checkFollowStatus(this.themeId).subscribe({
+          next: (isFollowing: boolean) => this.isFollowing = isFollowing,
+          error: (error: any) => console.log(error)
+        })
+      }
     })
-    this.storageService.currentUser.subscribe(user => this.currentUser = user)
+    this.storageService.currentUser.subscribe({
+      next: (user: User) => this.currentUser = user,
+      error: (error: any) => console.log(error)
+    })
   }
 
+  // pin/unpin theme
   onEmitCurrentId() {
     const themeRequest = {...this.theme, pinned: !this.theme.pinned}
    this.themeService.updateTheme(themeRequest).subscribe({
@@ -52,12 +60,13 @@ export class QuestionsHeaderComponent implements OnInit {
    })
   }
 
+  // follow/unfollow theme
   toggleFollow() {
     this.isFollowing ?
     this.themeService.deleteFollower(this.themeId).subscribe({
       next: (res: Response) => this.isFollowing = false,
       error: (error: any) => console.log(error)
-    })     : 
+    }) : 
       this.themeService.followTheme(this.themeId).subscribe({
         next: (res: Response) => this.isFollowing = true,
         error: (error: any) => console.log(error)

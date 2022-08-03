@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from 'src/app/Course';
 import { Question } from 'src/app/Question';
@@ -37,7 +37,6 @@ export class QuestionComponent implements OnInit {
     preguntaId: undefined
   }
 
-
   constructor(
     private questionService: QuestionService, 
     private answerService: AnswerService, 
@@ -50,30 +49,46 @@ export class QuestionComponent implements OnInit {
     const questionId = Number(this.route.snapshot.paramMap.get('questionId'))
     const themeId = Number(this.route.snapshot.paramMap.get('themeId'))
 
-    this.storageService.currentUser.subscribe(user => this.currentUser = user)
-
-    this.themeService.getTheme(themeId).subscribe(theme => {
-      this.theme = theme
-      this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
+    this.storageService.currentUser.subscribe({
+      next: (user: User) => this.currentUser = user,
+      error: (error: any) => console.log(error)
     })
-    this.questionService.getQuestionById(questionId).subscribe((question: any) => {
-      this.question = question
-      this.questionService.checkFollowStatus(question.id).subscribe({
-        next: (isFollowing: boolean) => this.isFollowing = isFollowing,
-        error: (error: any) => console.log(error)
-      })
-      this.timeSincePublished = moment(question.updatedAt).fromNow()
+      
+    this.themeService.getTheme(themeId).subscribe({
+      next: (theme: Theme) => {
+        this.theme = theme
+        this.courseService.getCourseById(this.theme.cursoId).subscribe({
+          next: (course: Course) => this.course = course,
+          error: (error: any) => console.log(error)
+        })},
+      error: (error: any) => console.log(error)
     })
-    this.answerService.getAnswersByQuestionId(questionId).subscribe(answers => {
-      this.answers = answers
-      if (answers != null) {
-        this.hasAnswers = true
+      
+    
+    this.questionService.getQuestionById(questionId).subscribe({
+      next: (question: Question) => {
+        this.question = question
+        this.questionService.checkFollowStatus(question.id!).subscribe({
+          next: (isFollowing: boolean) => this.isFollowing = isFollowing,
+          error: (error: any) => console.log(error)
+        })
+        this.timeSincePublished = moment(question.updatedAt).fromNow()
       }
     })
-    this.storageService.currentUser.subscribe(user => this.img = user.avatar)
+    this.answerService.getAnswersByQuestionId(questionId).subscribe({
+      next: (answers: Answer[]) => {
+        this.answers = answers
+        if (answers != null) {
+          this.hasAnswers = true
+        }
+      }
+    })
+    this.storageService.currentUser.subscribe({
+      next: (user: User) => this.img = user.avatar
+    })
   }
 
-
+  // gives positive/negative vote to question
   giveVote(vote: boolean) {
     let newUserVote: boolean | null
     this.question.userVote === vote && this.question.userVote !== null ? newUserVote = null : newUserVote = vote
@@ -85,18 +100,24 @@ export class QuestionComponent implements OnInit {
     })
   }
 
+  // gives positive/negative vote to answer
   voteForAnswer({vote, id} : {vote: boolean, id?: number}) {
-    this.answerService.vote(id!, vote).subscribe(res => {
-      // idea was to get only updated answer, but I'm short on time
-      const answers = this.answerService.getAnswersByQuestionId(this.question.id!).subscribe(answers => {
-        const oldIndex = this.answers.findIndex(answer => answer.id === id)
-        const updatedAnswer = answers.filter(el => el.id === id)
-        this.answers[oldIndex].totalNegativeVotes = updatedAnswer[0].totalNegativeVotes
-        this.answers[oldIndex].totalPositiveVotes = updatedAnswer[0].totalPositiveVotes
-        this.answers[oldIndex].userVote = updatedAnswer[0].userVote
+    this.answerService.vote(id!, vote).subscribe({
+      next: (response: any) => {
+        const answers = this.answerService.getAnswersByQuestionId(this.question.id!).subscribe({
+          next: (answers: Answer[]) => {
+            const oldIndex = this.answers.findIndex(answer => answer.id === id)
+            const updatedAnswer = answers.filter(el => el.id === id)
+            this.answers[oldIndex].totalNegativeVotes = updatedAnswer[0].totalNegativeVotes
+            this.answers[oldIndex].totalPositiveVotes = updatedAnswer[0].totalPositiveVotes
+            this.answers[oldIndex].userVote = updatedAnswer[0].userVote
+          },
+          error: (error: any) => console.log(error)
         })
-      })
+      }
+    })
   }
+
 
   saveAnswer(answerHtml: string) {
     this.newAnswer = {
@@ -106,12 +127,11 @@ export class QuestionComponent implements OnInit {
     }
 
   onAnswerSubmit() {
-    this.answerService.saveAnswer(this.newAnswer).subscribe((data: Answer[]) => {
-      this.answers = data
-    })  
+    this.answerService.saveAnswer(this.newAnswer).subscribe({
+      next: (data: Answer[]) => this.answers = data,
+      error: (error: any) => console.log(error)
+    })
   }
-
-
 
   orderByDate() {
     this.answers = this.answers.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
@@ -126,14 +146,16 @@ export class QuestionComponent implements OnInit {
   }
 
   pinQuestion() {
-    this.questionService.updateQuestion({...this.question, pinned: !this.question.pinned}).subscribe((res: any) => {
-      this.question = res
+    this.questionService.updateQuestion({...this.question, pinned: !this.question.pinned}).subscribe({
+      next: (response: any) => this.question = response,
+      error: (error: any) => console.log(error)
     })
   }
 
   pinAnswer(answer: Answer) {
-    this.answerService.updateAnswer({...answer, pinned: !answer.pinned}).subscribe((res: any) => {
-      this.answers = res
+    this.answerService.updateAnswer({...answer, pinned: !answer.pinned}).subscribe({
+      next: (response: any) => this.answers = response,
+      error: (error: any) => console.log(error)
     })
   }
 

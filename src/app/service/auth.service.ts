@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AuthData } from '../AuthData';
 import { User } from '../User';
-import { CourseService } from './course.service';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,7 @@ export class AuthService {
   }
 
   refreshToken() {
-    return this.http.get('http://localhost:3333/foro/auth/' + 'refreshtoken');
+    return this.http.get(this.url + 'refreshtoken');
   }
 
 }

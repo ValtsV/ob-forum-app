@@ -13,17 +13,22 @@ export class QuestionsComponent implements OnInit {
   pinnedQuestions: Question[] = []
   status: boolean = true
 
-  constructor(private questionService: QuestionService, private route: ActivatedRoute) { }
+  constructor(
+    private questionService: QuestionService, 
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
     const themeId = Number(this.route.snapshot.paramMap.get('id'));
-    this.questionService.getQuestionsByTemaId(themeId).subscribe(questions => {
-      questions.forEach(question => {
-        question.pinned ? this.pinnedQuestions.push(question) : this.questions.push(question)
-      })
+    this.questionService.getQuestionsByTemaId(themeId).subscribe({
+      next: (questions: Question[]) => {
+        questions.forEach(question => {
+          question.pinned ? this.pinnedQuestions.push(question) : this.questions.push(question)
+        })
+      },
+      error: (error: any) => console.log(error)
     })
   }
-
 
   orderByPositiveVotes() {
     this.questions = this.questions.sort((a,b) => {

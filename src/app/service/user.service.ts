@@ -36,20 +36,4 @@ export class UserService {
   setIsLoggedIn(): void {
     this.isLoggedIn = !this.isLoggedIn
   }
-
-  followQuestion(userId: number, questionId: number): void {
-
-  }
-
-  unfollowQuestion(userId: number, questionId: number): void {
-    
-  }
-
-  followTheme(userId: number, themeId: number): void {
-
-  }
-
-  unfollowTheme(userId: number, themeId: number): void {
-
-  }
 }

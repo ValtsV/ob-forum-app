@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { StorageService } from './service/storage.service';
 import * as moment from 'moment';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,10 +16,12 @@ export class AppComponent {
   headerBg: string = '#F8F8F9'
   
 
-  constructor(private storageService: StorageService, 
-              private fileService: FileUploadService,
-              private router: Router, 
-              private route: ActivatedRoute) {}
+  constructor(
+    private storageService: StorageService, 
+    private fileService: FileUploadService,
+    private router: Router, 
+    private route: ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
     moment.locale('es')
@@ -37,8 +38,8 @@ export class AppComponent {
         });
       });
     })
-    //  this.isLoggedIn = this.storageService.isLoggedIn()
-    this.storageService.isLoggedInBSubject().subscribe(data => {
+    this.storageService.isLoggedInBSubject().subscribe(
+      data => {
       this.isLoggedIn = data
     })
 

@@ -9,7 +9,7 @@ import { Question } from 'src/app/Question';
 export class QuestionCardComponent implements OnInit {
   @Input() question = {} as Question
   @Input() isPinned?: boolean
-  timeSincePublished: String = "2 días"
+  timeSincePublished: String = "2 días" // TODO Fix this
 
   constructor() { }
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/Course';
 import { Question } from 'src/app/Question';
-import { QuestionRequest } from 'src/app/QuestionRequest';
 import { CourseService } from 'src/app/service/course.service';
 import { QuestionService } from 'src/app/service/question.service';
 import { ThemeService } from 'src/app/service/theme.service';
@@ -26,8 +24,6 @@ export class AddQuestionComponent implements OnInit {
     isPinned: false
   }
 
- 
-
   constructor(
     private themeService: ThemeService, 
     private courseService: CourseService, 
@@ -38,10 +34,18 @@ export class AddQuestionComponent implements OnInit {
   ngOnInit(): void {
     const themeId = Number(this.route.snapshot.paramMap.get('themeId'))
 
-    this.themeService.getTheme(themeId).subscribe(theme => {
-      this.theme = theme
-      this.courseService.getCourseById(this.theme.cursoId).subscribe(course => this.course = course)
-      this.themeService.getThemes(this.theme.cursoId).subscribe(themes => this.themeList = themes)
+    this.themeService.getTheme(themeId).subscribe({
+      next: (theme: Theme) => {
+        this.theme = theme
+        this.courseService.getCourseById(this.theme.cursoId).subscribe({
+          next: (course: Course) => this.course = course,
+          error: (error: any) => console.log(error)
+        })
+            this.themeService.getThemes(this.theme.cursoId).subscribe({
+          next: (themes: Theme[]) => this.themeList = themes,
+          error: (error: any) => console.log(error)
+        })
+      }
     })
   }
 
@@ -50,9 +54,9 @@ export class AddQuestionComponent implements OnInit {
   }
 
   onSubmit() {
-    this.questionService.saveQuestion(this.newQuestion).subscribe((data: Question) => {
-      this.router.navigate(['temas', this.newQuestion.temaId, 'preguntas', data.id])
-    })  
+    this.questionService.saveQuestion(this.newQuestion).subscribe({
+      next: (data: Question) => this.router.navigate(['temas', this.newQuestion.temaId, 'preguntas', data.id]),
+      error: (error: any) => console.log(error)
+    })
   }
-  
 }

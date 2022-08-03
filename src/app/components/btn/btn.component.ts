@@ -9,9 +9,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class BtnComponent implements OnInit {
   @Input() svg!: string
   @Input() text!: string
-  content!: SafeHtml
 
-  constructor(public sanitizer: DomSanitizer) { 
+  constructor() { 
 
   }
 

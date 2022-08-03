@@ -5,6 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TranslatePipe implements PipeTransform {
 
+  // TODO: change to switch
   transform(value: string): string {
     if (value === 'theme') {
       return 'tema'

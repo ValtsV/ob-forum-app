@@ -22,8 +22,9 @@ export class HeaderComponent implements OnInit {
   constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
-    this.storageService.currentUser.subscribe(user => {
-      this.user = user
+    this.storageService.currentUser.subscribe({
+      next: (user: User) => this.user = user,
+      error: (error: any) => console.log(error)
     })
   }
 

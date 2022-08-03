@@ -105,7 +105,6 @@
   <form #newAnswerForm="ngForm" (ngSubmit)="onAnswerSubmit()">
     <div class="question__div-write-answer-container" id="respond">
       <img [src]="img" />
-      <!-- TODO: change to button -->
       <button
         *ngIf="!writingModeOn"
         (click)="toggleWritingMode()"

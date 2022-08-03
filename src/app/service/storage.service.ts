@@ -50,8 +50,6 @@ export class StorageService {
     return false;
   }
 
-  
-
   // TOKEN
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);

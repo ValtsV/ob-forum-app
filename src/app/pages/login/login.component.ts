@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Course } from 'src/app/Course';
 import { AuthService } from 'src/app/service/auth.service';
 import { CourseService } from 'src/app/service/course.service';
-import { FileUploadService } from 'src/app/service/file-upload.service';
 import { StorageService } from 'src/app/service/storage.service';
-import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +21,10 @@ export class LoginComponent implements OnInit {
   return: string = ''
   eventBusSub?: Subscription;
 
-  constructor(private userService: UserService, 
+  constructor(
               private storageService: StorageService, 
               private authService: AuthService, 
-              private courseService: CourseService, 
-              private fileService: FileUploadService,
-              private router: Router, 
+              private courseService: CourseService,
               private route: ActivatedRoute, 
               private fb: FormBuilder) {
    }
@@ -35,27 +32,27 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => this.return = params['return'] || '/temas');
-      
   }
 
   submitLoginForm() {
     if(this.form.valid) {
-          const authData = this.form.getRawValue()  
-          this.authService.login(authData).subscribe({
-            next: data => {
-              this.storageService.saveUser(data)
-              this.courseService.getCourses().subscribe(courses => {
-                this.courseService.setSelectedCourse(courses[0])
+      const authData = this.form.getRawValue()  
+      this.authService.login(authData).subscribe({
+        next: data => {
+          this.storageService.saveUser(data)
+          this.courseService.getCourses().subscribe({
+            next: (courses: Course[]) => {
+              this.courseService.setSelectedCourse(courses[0])
 
-                // Forces app reload, to set loggedin value in app component correctly / this way login guard stays simple
-                this.redirect()
-              })
-              
-            },
-            error: err => {
-              this.errorStatus = err.status
+              // Forces app reload, to set loggedin value in app component correctly / this way login guard stays simple
+              this.redirect()
             }
-          });
+          })
+        },
+        error: err => {
+          this.errorStatus = err.status
+        }
+      });
           
     }
   }

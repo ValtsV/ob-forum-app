@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Course } from 'src/app/Course';
 import { CourseService } from 'src/app/service/course.service';
-import { FileUploadService } from 'src/app/service/file-upload.service';
 
 @Component({
   selector: 'app-sidemenu',
@@ -14,21 +12,29 @@ export class SidemenuComponent implements OnInit {
   selectedCourse: Course = {} as Course
   showCourses: boolean = true
 
-  constructor(private courseService: CourseService, private fileService: FileUploadService, protected sanitizer: DomSanitizer) {   }
+  constructor(
+    private courseService: CourseService
+    ) {   }
 
   ngOnInit(): void {
-    this.courseService.getCourses().subscribe((courses) => {
-      this.courses = courses
-      this.courseService.setSelectedCourse(courses[0])    
-      })
-
-    
-    this.courseService.getSelectedCourse().subscribe((course) => this.selectedCourse = course)
+    this.courseService.getCourses().subscribe({
+      next: (courses: Course[]) => {
+        this.courses = courses
+        this.courseService.setSelectedCourse(courses[0])  
+      },
+      error: (error: any) => console.log(error)
+    })
+    this.courseService.getSelectedCourse().subscribe({
+      next: (course: Course) => this.selectedCourse = course,
+      error: (error: any) => console.log(error)
+    })
   }
 
+  // select course from menu
   selectCourse = (course: Course) => {
     this.courseService.setSelectedCourse(course)}
 
+  // show/not show course menu 
   toggleCoursesMenu() {
     this.showCourses = !this.showCourses
   }  

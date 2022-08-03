@@ -48,8 +48,8 @@ export class TiptapComponent implements OnInit {
     this.value = '<p>Escribe tu ' + this.translate.transform(this.type) + '</p>'
   }
 
+  // sets link as link in tiptap editor
   toggleLink() {
-    
     const previousUrl = this.editor.getAttributes('link')['href']
     const url = window.prompt('URL', previousUrl)
 

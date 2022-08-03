@@ -1,4 +1,4 @@
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpEvent } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FileUploadService } from 'src/app/service/file-upload.service';
 import { StorageService } from 'src/app/service/storage.service';
@@ -12,7 +12,6 @@ import { UserService } from 'src/app/service/user.service';
 export class ImageUploadComponent implements OnInit {
   selectedFile?: File;
   currentFile?: File;
-  progress = 0;
   message = '';
 
   constructor(
@@ -32,12 +31,15 @@ export class ImageUploadComponent implements OnInit {
     if (this.selectedFile) {
 
       this.currentFile = this.selectedFile;
-      this.uploadService.upload(this.currentFile).subscribe(response => {
-        if (response.type === 4) {
-          const id = this.storageService.getUser().id
-          this.userService.refreshUser(id);
-          this.message = 'Success'
-        }
+      this.uploadService.upload(this.currentFile).subscribe({
+        next: (response: HttpEvent<any>) => {
+          if (response.type === 4) {
+            const id = this.storageService.getUser().id
+            this.userService.refreshUser(id);
+            this.message = 'Success'
+          }
+        },
+        error: (error: any) => console.log(error)
       })
     }
   }
